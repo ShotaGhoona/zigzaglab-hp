@@ -236,7 +236,7 @@ export default function IntegratedProductSection() {
                   src={currentProduct.image}
                   alt={currentProduct.name}
                   fill
-                  className="object-cover transition-all duration-500"
+                  className="object-contain transition-all duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
               </div>
