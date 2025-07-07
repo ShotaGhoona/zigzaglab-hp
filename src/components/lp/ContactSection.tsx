@@ -90,7 +90,7 @@ export default function ContactSection() {
           message: result.error || '送信に失敗しました。'
         })
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus({
         type: 'error',
         message: 'ネットワークエラーが発生しました。もう一度お試しください。'

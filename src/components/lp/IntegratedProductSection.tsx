@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 
 export default function IntegratedProductSection() {
   const [selectedCategory, setSelectedCategory] = useState("缶バッジ")
@@ -39,7 +40,7 @@ export default function IntegratedProductSection() {
         detail:
           "汎用性が高く、販促や記念品として定番のアイテム。サイズや仕様のバリエーション展開が可能です。",
         image:
-          "https://images.unsplash.com/photo-1472141521881-95d0e87e2e39?w=600&h=400&fit=crop&crop=center",
+          "/product/01/01.png",
       },
       {
         name: "ハート型缶バッジ",
@@ -47,7 +48,7 @@ export default function IntegratedProductSection() {
         detail:
           "視認性の高いハート型で、キャラクターやブランドの世界観をより魅力的に表現できます。",
         image:
-          "https://images.unsplash.com/photo-1595665593673-bf1ad45e3d30?w=600&h=400&fit=crop&crop=center",
+          "/product/01/02.png",
       },
       {
         name: "スタンド付き缶バッジ",
@@ -55,7 +56,7 @@ export default function IntegratedProductSection() {
         detail:
           "バッジとしての使用はもちろん、立てて飾れるスタンド機能付きで、陳列・展示にも対応します。",
         image:
-          "https://images.unsplash.com/photo-1472141521881-95d0e87e2e39?w=600&h=400&fit=crop&crop=center",
+          "/product/01/03.png",
       },
       {
         name: "チャーム付き缶バッジ",
@@ -63,7 +64,7 @@ export default function IntegratedProductSection() {
         detail:
           "缶バッジにチャームを組み合わせることで、動きと立体感をプラスした高付加価値アイテムです。",
         image:
-          "https://images.unsplash.com/photo-1595665593673-bf1ad45e3d30?w=600&h=400&fit=crop&crop=center",
+          "/product/01/04.png",
       },
       {
         name: "缶ストラップ",
@@ -71,7 +72,7 @@ export default function IntegratedProductSection() {
         detail:
           "缶バッジのデザイン性を活かしたストラップ仕様。携帯性に優れ、常時のプロモーションツールとして活用できます。",
         image:
-          "https://images.unsplash.com/photo-1472141521881-95d0e87e2e39?w=600&h=400&fit=crop&crop=center",
+          "/product/01/05.png",
       },
       {
         name: "ツインフェイスストラップ",
@@ -79,7 +80,7 @@ export default function IntegratedProductSection() {
         detail:
           "表裏で異なるデザインを楽しめる2面構成。用途やシーンに応じた訴求が可能です。",
         image:
-          "https://images.unsplash.com/photo-1595665593673-bf1ad45e3d30?w=600&h=400&fit=crop&crop=center",
+          "/product/01/06.png",
       },
       {
         name: "連結ストラップ",
@@ -87,7 +88,7 @@ export default function IntegratedProductSection() {
         detail:
           "複数の缶バッジを連結させることで、シリーズ性・コレクション性を演出できます。キャラクター展開に最適です。",
         image:
-          "https://images.unsplash.com/photo-1472141521881-95d0e87e2e39?w=600&h=400&fit=crop&crop=center",
+          "/product/01/07.png",
       },
     ],
 
@@ -100,7 +101,7 @@ export default function IntegratedProductSection() {
         detail:
           "透明感と強度を兼ね備えたアクリル製のスタンド型アイテム。ディスプレイ性に優れ、飾って楽しむ商品として人気です。",
         image:
-          "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&crop=center",
+          "/product/02/01.png",
       },
       {
         name: "アクリルキーホルダー",
@@ -109,7 +110,7 @@ export default function IntegratedProductSection() {
         detail:
           "厚みと高精細印刷による視覚的なインパクトが特徴。日常使いのアイテムとしても優れた訴求効果があります。",
         image:
-          "https://images.unsplash.com/photo-1589992462895-d37835a9e1f8?w=600&h=400&fit=crop&crop=center",
+          "/product/02/02.png",
       },
       {
         name: "アクリル観覧車",
@@ -117,7 +118,7 @@ export default function IntegratedProductSection() {
         detail:
           "アクリルパーツを使用した回転式のディスプレイ型アイテム。複数キャラクターを一体で展開できます。",
         image:
-          "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&crop=center",
+            "/product/02/03.png",
       },
       {
         name: "アクリルメリーゴーランド",
@@ -126,7 +127,7 @@ export default function IntegratedProductSection() {
         detail:
           "回転ギミックと精巧なカットが魅力の立体型ディスプレイ。ファンアイテムとしての訴求力が高い構造です。",
         image:
-          "https://images.unsplash.com/photo-1589992462895-d37835a9e1f8?w=600&h=400&fit=crop&crop=center",
+          "/product/02/04.png",
       },
       {
         name: "アクリルバイキング",
@@ -135,7 +136,7 @@ export default function IntegratedProductSection() {
         detail:
           "可動性を持たせた仕様で、視覚的に動きのある演出が可能。遊び心と高級感を両立しています。",
         image:
-          "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&crop=center",
+          "/product/02/05.png",
       },
       {
         name: "アクリルブランコ",
@@ -144,7 +145,7 @@ export default function IntegratedProductSection() {
         detail:
           "キャラクターやモチーフがゆらゆらと揺れる仕掛け付き。癒し効果と独自性を兼ね備えた商品です。",
         image:
-          "https://images.unsplash.com/photo-1589992462895-d37835a9e1f8?w=600&h=400&fit=crop&crop=center",
+          "/product/02/06.png",
       },
     ],
 
@@ -156,7 +157,7 @@ export default function IntegratedProductSection() {
         detail:
           "円形缶バッジの展示に特化した専用スタンド。シンプルな構造で、イベントや店頭でも扱いやすい設計です。",
         image:
-          "https://images.unsplash.com/photo-1472141521881-95d0e87e2e39?w=600&h=400&fit=crop&crop=center",
+          "/product/03/01.png",
       },
       {
         name: "缶バッジスタンド_ハート",
@@ -164,7 +165,7 @@ export default function IntegratedProductSection() {
         detail:
           "ハート型缶バッジの形状にフィットした専用スタンド。製品の魅力を最大限に引き出す什器として活用できます。",
         image:
-          "https://images.unsplash.com/photo-1595665593673-bf1ad45e3d30?w=600&h=400&fit=crop&crop=center",
+          "/product/03/02.png",
       },
     ],
   } as const;
@@ -231,10 +232,11 @@ export default function IntegratedProductSection() {
             {/* 商品画像 */}
             <div className="relative order-1 lg:order-1">
               <div className="aspect-[4/3] rounded-[2rem] overflow-hidden bg-gradient-to-br from-primary/10 via-secondary/5 to-primary/5 relative group">
-                <img 
+                <Image 
                   src={currentProduct.image}
                   alt={currentProduct.name}
-                  className="w-full h-full object-cover transition-all duration-500"
+                  fill
+                  className="object-cover transition-all duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
               </div>

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Image from "next/image"
 
 export default function QualityShowcase() {
   const [isVisible, setIsVisible] = useState(false)
@@ -31,14 +32,14 @@ export default function QualityShowcase() {
       title: "複雑な立体形状",
       subtitle: "Complex 3D Shapes",
       description: "立体アクリルスタンドの企画や修正を行い、難しい形状やあっ！と目を引く作品も制作いたします。",
-      image: "https://images.unsplash.com/photo-1564069114553-7215e1ff1890?w=600&h=400&fit=crop&crop=center"
+      path: "/quality01.png"
     },
     {
       number: "02",
       title: "品質管理",
       subtitle: "Quality Control",
       description: "徹底した品質管理を実施。クリーンルーム内での製造により汚れや傷の発生を防ぎます。",
-      image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop&crop=center"
+      path: "/quality02.png"
     }
   ]
 
@@ -70,10 +71,11 @@ export default function QualityShowcase() {
               <div className={`relative ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                 <div className="relative group">
                   <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-primary/5 to-secondary/5">
-                    <img 
-                      src={feature.image}
+                    <Image 
+                      src={feature.path}
                       alt={feature.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
                   <div className="absolute top-6 left-6">
