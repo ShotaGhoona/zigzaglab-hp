@@ -33,23 +33,7 @@ export default function IntegratedProductSection() {
 
   const productCategories = {
     /** 缶バッジ系 */
-    "缶バッジ": [
-      {
-        name: "缶バッジ",
-        description: "推しをアピールする定番アイテム。",
-        detail:
-          "汎用性が高く、販促や記念品として定番のアイテム。サイズや仕様のバリエーション展開が可能です。",
-        image:
-          "/product/01/01.png",
-      },
-      {
-        name: "ハート型缶バッジ",
-        description: "印象的なフォルムで、存在感を演出。",
-        detail:
-          "視認性の高いハート型で、キャラクターやブランドの世界観をより魅力的に表現できます。",
-        image:
-          "/product/01/02.png",
-      },
+    "ZIGZAGグッズ": [
       {
         name: "スタンド付き缶バッジ",
         description: "展示用としても活用可能な実用性が特長。",
@@ -89,6 +73,22 @@ export default function IntegratedProductSection() {
           "複数の缶バッジを連結させることで、シリーズ性・コレクション性を演出できます。キャラクター展開に最適です。",
         image:
           "/product/01/07.png",
+      },
+      {
+        name: "缶バッジ",
+        description: "推しをアピールする定番アイテム。",
+        detail:
+          "汎用性が高く、販促や記念品として定番のアイテム。サイズや仕様のバリエーション展開が可能です。",
+        image:
+          "/product/01/01.png",
+      },
+      {
+        name: "ハート型缶バッジ",
+        description: "印象的なフォルムで、存在感を演出。",
+        detail:
+          "視認性の高いハート型で、キャラクターやブランドの世界観をより魅力的に表現できます。",
+        image:
+          "/product/01/02.png",
       },
     ],
 

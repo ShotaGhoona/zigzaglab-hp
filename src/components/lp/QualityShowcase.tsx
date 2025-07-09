@@ -50,7 +50,7 @@ export default function QualityShowcase() {
     >
       <div className="container mx-auto max-w-7xl">
         <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h2 className="text-5xl md:text-6xl font-light text-foreground mb-6">
+          <h2 className="text-4xl md:text-6xl font-light text-foreground mb-6">
             品質への<span className="font-bold text-primary">こだわり</span>
           </h2>
           <p className="text-lg text-foreground/60 max-w-3xl mx-auto font-light leading-relaxed">

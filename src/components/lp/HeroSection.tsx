@@ -130,9 +130,9 @@ export default function HeroSection05() {
         
         <div className={`transition-all duration-1000 ease-out delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <p className="text-xl md:text-2xl text-foreground/70 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
-            機構部品メーカーが届けるジャパンクオリティ。
+            品質にこだわったグッズを作成しませんか？
             <br />
-            小ロットから大ロットまで対応いたします。
+            小ロットから大ロットまで幅広く対応いたします。
           </p>
         </div>
         {/* 移動をスムーズにしたい */}

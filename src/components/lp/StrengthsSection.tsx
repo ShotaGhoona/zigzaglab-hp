@@ -55,7 +55,7 @@ export default function StrengthsSection() {
     },
     {
       id: 2,
-      category: "📊 １～３０万個",
+      category: "📊 ～45万個",
       title: "どんな数量でも対応",
       description: "オンデマンド印刷機を導入し、小ロットから大量生産まで対応可能です。",
       bgGradient: "from-blue-500/30 via-cyan-400/20 to-blue-600/30",

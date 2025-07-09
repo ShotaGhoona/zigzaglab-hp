@@ -65,7 +65,7 @@ export default function ProcessSection() {
     >
       <div className="container mx-auto max-w-6xl">
         <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h2 className="text-5xl md:text-6xl font-light text-foreground mb-6">
+          <h2 className="text-4xl md:text-6xl font-light text-foreground mb-6">
             制作<span className="font-bold text-primary">プロセス</span>
           </h2>
           <p className="text-lg text-foreground/60 max-w-2xl mx-auto font-light leading-relaxed">

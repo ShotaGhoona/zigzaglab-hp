@@ -108,7 +108,7 @@ export default function ContactSection() {
     >
       <div className="container mx-auto max-w-6xl">
         <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h2 className="text-5xl md:text-6xl font-light text-foreground mb-6">
+          <h2 className="text-4xl md:text-6xl font-light text-foreground mb-6">
             お<span className="font-bold text-primary">問い合わせ</span>
           </h2>
           <p className="text-lg text-foreground/60 max-w-2xl mx-auto font-light leading-relaxed">
@@ -122,7 +122,7 @@ export default function ContactSection() {
         <div className={`transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="bg-card/30 backdrop-blur-sm rounded-3xl border border-border/20 p-8 md:p-12">
             <div className="text-center mb-10">
-              <h3 className="text-3xl font-light text-foreground mb-4">
+              <h3 className="text-2xl font-light text-foreground mb-4">
                 お問い合わせ<span className="font-bold text-primary">フォーム</span>
               </h3>
               <p className="text-foreground/70 font-light">
