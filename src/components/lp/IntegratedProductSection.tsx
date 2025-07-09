@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 
 export default function IntegratedProductSection() {
-  const [selectedCategory, setSelectedCategory] = useState("缶バッジ")
+  const [selectedCategory, setSelectedCategory] = useState("ZIGZAGグッズ")
   const [selectedProductIndex, setSelectedProductIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
 
