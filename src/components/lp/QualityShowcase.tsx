@@ -32,7 +32,7 @@ export default function QualityShowcase() {
       title: "複雑な立体形状",
       subtitle: "Complex 3D Shapes",
       description: "立体アクリルスタンドの企画や修正を行い、難しい形状やあっ！と目を引く作品も制作いたします。",
-      path: "/quality01.png"
+      path: "/quality04.png"
     },
     {
       number: "02",
