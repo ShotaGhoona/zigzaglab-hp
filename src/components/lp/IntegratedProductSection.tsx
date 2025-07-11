@@ -74,22 +74,22 @@ export default function IntegratedProductSection() {
         image:
           "/product/01/07.png",
       },
-      {
-        name: "缶バッジ",
-        description: "推しをアピールする定番アイテム。",
-        detail:
-          "汎用性が高く、販促や記念品として定番のアイテム。サイズや仕様のバリエーション展開が可能です。",
-        image:
-          "/product/01/01.png",
-      },
-      {
-        name: "ハート型缶バッジ",
-        description: "印象的なフォルムで、存在感を演出。",
-        detail:
-          "視認性の高いハート型で、キャラクターやブランドの世界観をより魅力的に表現できます。",
-        image:
-          "/product/01/02.png",
-      },
+      // {
+      //   name: "缶バッジ",
+      //   description: "推しをアピールする定番アイテム。",
+      //   detail:
+      //     "汎用性が高く、販促や記念品として定番のアイテム。サイズや仕様のバリエーション展開が可能です。",
+      //   image:
+      //     "/product/01/01.png",
+      // },
+      // {
+      //   name: "ハート型缶バッジ",
+      //   description: "印象的なフォルムで、存在感を演出。",
+      //   detail:
+      //     "視認性の高いハート型で、キャラクターやブランドの世界観をより魅力的に表現できます。",
+      //   image:
+      //     "/product/01/02.png",
+      // },
     ],
 
     /** アクリル系 */
@@ -120,15 +120,15 @@ export default function IntegratedProductSection() {
         image:
             "/product/02/03.png",
       },
-      {
-        name: "アクリルメリーゴーランド",
-        description:
-          "繊細なデザインが魅力の回転式オブジェ。",
-        detail:
-          "回転ギミックと精巧なカットが魅力の立体型ディスプレイ。ファンアイテムとしての訴求力が高い構造です。",
-        image:
-          "/product/02/04.png",
-      },
+      // {
+      //   name: "アクリルメリーゴーランド",
+      //   description:
+      //     "繊細なデザインが魅力の回転式オブジェ。",
+      //   detail:
+      //     "回転ギミックと精巧なカットが魅力の立体型ディスプレイ。ファンアイテムとしての訴求力が高い構造です。",
+      //   image:
+      //     "/product/02/04.png",
+      // },
       {
         name: "アクリルバイキング",
         description:
