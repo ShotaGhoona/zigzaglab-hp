@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Link from "next/link"
 
 export default function StrengthsSection() {
   const [isVisible, setIsVisible] = useState(false)
@@ -193,6 +194,21 @@ export default function StrengthsSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* About詳細ページへのCTA */}
+        <div className="text-center mt-16">
+          <div className={`transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <Link 
+              href="/about"
+              className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 hover:scale-105 shadow-lg"
+            >
+              詳しく見る
+              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
         </div>
 
         {/* Next-Level Background Decorative Elements */}

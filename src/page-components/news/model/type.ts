@@ -15,7 +15,6 @@ export interface NewsItem {
   published_at: string;
   updated_at: string;
   read_time_minutes: number;
-  view_count: number;
   is_featured: boolean;
   tags?: NewsTag[];
 }

@@ -26,10 +26,3 @@ export const formatReadTime = (minutes: number): string => {
   return `${minutes}分で読める`;
 };
 
-// View count formatting
-export const formatViewCount = (count: number): string => {
-  if (count >= 1000) {
-    return `${(count / 1000).toFixed(1)}k回閲覧`;
-  }
-  return `${count}回閲覧`;
-};

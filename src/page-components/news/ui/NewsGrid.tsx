@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { getFilteredNews, getFeaturedNews } from "../lib/newsData"
-import { getCategoryColor, formatNewsDate, formatReadTime, formatViewCount } from "@/constants/news"
+import { getCategoryColor, formatNewsDate, formatReadTime } from "@/constants/news"
 import type { NewsFilterParams } from "../model/type"
 
 interface NewsGridProps {
@@ -107,7 +107,6 @@ export default function NewsGrid({ selectedCategory, selectedYear, searchTerm }:
                       <p className="text-sm text-foreground/50 font-light">{formatNewsDate(item.published_at)}</p>
                       <div className="flex items-center gap-4 text-xs text-foreground/40">
                         <span>{formatReadTime(item.read_time_minutes)}</span>
-                        <span>{formatViewCount(item.view_count)}</span>
                       </div>
                     </div>
                     <h3 className="text-xl font-semibold text-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors">
@@ -166,7 +165,6 @@ export default function NewsGrid({ selectedCategory, selectedYear, searchTerm }:
                   <p className="text-sm text-foreground/50 font-light">{formatNewsDate(item.published_at)}</p>
                   <div className="flex items-center gap-4 text-xs text-foreground/40">
                     <span>{formatReadTime(item.read_time_minutes)}</span>
-                    <span>{formatViewCount(item.view_count)}</span>
                   </div>
                 </div>
                 <h3 className="text-lg font-medium text-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors">

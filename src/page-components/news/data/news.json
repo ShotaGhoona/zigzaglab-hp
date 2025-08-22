@@ -11,7 +11,6 @@
     "published_at": "2024-03-15T10:00:00Z",
     "updated_at": "2024-03-15T10:00:00Z",
     "read_time_minutes": 5,
-    "view_count": 1250,
     "is_featured": true,
     "tags": [
       {"id": "1", "tag_name": "技術革新"},
@@ -31,7 +30,6 @@
     "published_at": "2024-03-10T09:00:00Z",
     "updated_at": "2024-03-10T09:00:00Z",
     "read_time_minutes": 3,
-    "view_count": 2100,
     "is_featured": true,
     "tags": [
       {"id": "4", "tag_name": "キャンペーン"},
@@ -51,7 +49,6 @@
     "published_at": "2024-03-05T14:00:00Z",
     "updated_at": "2024-03-05T14:00:00Z",
     "read_time_minutes": 4,
-    "view_count": 890,
     "is_featured": false,
     "tags": [
       {"id": "7", "tag_name": "工場見学"},
@@ -71,7 +68,6 @@
     "published_at": "2024-02-28T11:00:00Z",
     "updated_at": "2024-02-28T11:00:00Z",
     "read_time_minutes": 3,
-    "view_count": 1540,
     "is_featured": true,
     "tags": [
       {"id": "10", "tag_name": "新商品"},
@@ -91,7 +87,6 @@
     "published_at": "2024-02-20T16:00:00Z",
     "updated_at": "2024-02-20T16:00:00Z",
     "read_time_minutes": 6,
-    "view_count": 720,
     "is_featured": false,
     "tags": [
       {"id": "13", "tag_name": "環境"},
@@ -111,7 +106,6 @@
     "published_at": "2023-12-15T10:00:00Z",
     "updated_at": "2023-12-15T10:00:00Z",
     "read_time_minutes": 2,
-    "view_count": 450,
     "is_featured": false,
     "tags": [
       {"id": "16", "tag_name": "営業時間"},
@@ -131,7 +125,6 @@
     "published_at": "2024-01-25T13:00:00Z",
     "updated_at": "2024-01-25T13:00:00Z",
     "read_time_minutes": 4,
-    "view_count": 980,
     "is_featured": false,
     "tags": [
       {"id": "19", "tag_name": "品質管理"},
@@ -151,7 +144,6 @@
     "published_at": "2024-03-01T15:00:00Z",
     "updated_at": "2024-03-01T15:00:00Z",
     "read_time_minutes": 5,
-    "view_count": 1830,
     "is_featured": true,
     "tags": [
       {"id": "22", "tag_name": "コンテスト"},

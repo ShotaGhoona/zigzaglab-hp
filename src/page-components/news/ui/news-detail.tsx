@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { getNewsById, getRelatedNews } from "@/page-components/news/lib/newsData"
-import { getCategoryColor, formatNewsDate, formatReadTime, formatViewCount } from "@/constants/news"
+import { getCategoryColor, formatNewsDate, formatReadTime } from "@/constants/news"
 
 interface NewsDetailProps {
   newsId: string
@@ -71,7 +71,6 @@ export default function NewsDetail({ newsId }: NewsDetailProps) {
                 </span>
                 <span className="text-sm text-foreground/50">{formatNewsDate(newsData.published_at)}</span>
                 <span className="text-sm text-foreground/40">{formatReadTime(newsData.read_time_minutes)}</span>
-                <span className="text-sm text-foreground/40">{formatViewCount(newsData.view_count)}</span>
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">

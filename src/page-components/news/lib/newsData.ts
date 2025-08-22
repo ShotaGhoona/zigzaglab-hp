@@ -1,4 +1,4 @@
-import { NewsItem, NewsCategory, NewsFilterParams, NewsPagination } from "@/types/news";
+import { NewsItem, NewsCategory, NewsFilterParams, NewsPagination } from "../model/type";
 import newsData from "../data/news.json";
 import categoriesData from "../data/categories.json";
 
@@ -53,10 +53,6 @@ export const getFilteredNews = (params: NewsFilterParams = {}): {
       case 'published_at':
         aValue = new Date(a.published_at).getTime();
         bValue = new Date(b.published_at).getTime();
-        break;
-      case 'view_count':
-        aValue = a.view_count;
-        bValue = b.view_count;
         break;
       case 'title':
         aValue = a.title;
