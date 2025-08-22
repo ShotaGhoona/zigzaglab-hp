@@ -1,9 +1,9 @@
-import ContactSection from "@/components/lp/ContactSection";
-import StrengthsSection from "@/components/lp/StrengthsSection";
-import QualityShowcase from "@/components/lp/QualityShowcase";
-import IntegratedProductSection from "@/components/lp/IntegratedProductSection";
-import ProcessSection from "@/components/lp/ProcessSection";
-import HeroSection from "@/components/lp/HeroSection";
+import ContactSection from "@/page-components/lp/ui/ContactSection";
+import StrengthsSection from "@/page-components/lp/ui/StrengthsSection";
+import QualityShowcase from "@/page-components/lp/ui/QualityShowcase";
+import IntegratedProductSection from "@/page-components/lp/ui/IntegratedProductSection";
+import ProcessSection from "@/page-components/lp/ui/ProcessSection";
+import HeroSection from "@/page-components/lp/ui/HeroSection";
 
 export default function Index() {
   return (
