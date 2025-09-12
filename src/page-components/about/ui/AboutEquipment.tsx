@@ -91,10 +91,10 @@ export default function AboutEquipment() {
         <div className="text-center mb-16">
           <div className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              保有<span className="text-primary">機材</span>
+              保有<span className="text-primary">設備</span>
             </h2>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              最新の機材を導入し、高品質な製品づくりを実現しています。
+              最新の設備を導入し、高品質な製品づくりを実現しています。
             </p>
           </div>
         </div>

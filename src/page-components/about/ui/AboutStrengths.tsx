@@ -189,7 +189,6 @@ export default function AboutStrengths() {
               {/* Section Header */}
               <div className="text-center mb-16">
                 <div className="flex items-center justify-center gap-4 mb-6">
-                  {strength.icon}
                   <h3 className="text-4xl md:text-5xl font-bold text-gray-900">
                     {strength.title}
                   </h3>
