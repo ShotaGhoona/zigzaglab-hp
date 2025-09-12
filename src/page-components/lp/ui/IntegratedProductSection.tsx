@@ -1,11 +1,14 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
+import { allProducts, type Product } from "@/constants/product"
 
 export default function IntegratedProductSection() {
-  const [selectedCategory, setSelectedCategory] = useState("全て")
+  const [selectedCategory, setSelectedCategory] = useState("ALL")
   const [isVisible, setIsVisible] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -26,101 +29,17 @@ export default function IntegratedProductSection() {
 
     return () => observer.disconnect()
   }, [])
-  const allProducts = [
-    // ZIGZAGグッズ
-    {
-      name: "スタンド付き缶バッジ",
-      category: "ZIGZAGグッズ",
-      description: "展示用としても活用可能な実用性が特長。",
-      detail: "バッジとしての使用はもちろん、立てて飾れるスタンド機能付きで、陳列・展示にも対応します。",
-      image: "/product/01/03.png",
-    },
-    {
-      name: "チャーム付き缶バッジ",
-      category: "ZIGZAGグッズ", 
-      description: "揺れるチャームがアクセント。",
-      detail: "缶バッジにチャームを組み合わせることで、動きと立体感をプラスした高付加価値アイテムです。",
-      image: "/product/01/04.png",
-    },
-    {
-      name: "缶ストラップ",
-      category: "ZIGZAGグッズ",
-      description: "持ち歩きに適したコンパクトなデザイン。",
-      detail: "缶バッジのデザイン性を活かしたストラップ仕様。携帯性に優れ、常時のプロモーションツールとして活用できます。",
-      image: "/product/01/05.png",
-    },
-    {
-      name: "ツインフェイスストラップ",
-      category: "ZIGZAGグッズ",
-      description: "両面にデザインを施すことで視認性を向上。",
-      detail: "表裏で異なるデザインを楽しめる2面構成。用途やシーンに応じた訴求が可能です。",
-      image: "/product/01/06.png",
-    },
-    {
-      name: "連結ストラップ",
-      category: "ZIGZAGグッズ",
-      description: "複数モチーフを一体化した連携型仕様。",
-      detail: "複数の缶バッジを連結させることで、シリーズ性・コレクション性を演出できます。キャラクター展開に最適です。",
-      image: "/product/01/07.png",
-    },
-    // アクリルグッズ
-    {
-      name: "アクリルスタンド",
-      category: "アクリルグッズ",
-      description: "安定感と透明感が特徴のディスプレイ向けアイテム。",
-      detail: "透明感と強度を兼ね備えたアクリル製のスタンド型アイテム。ディスプレイ性に優れ、飾って楽しむ商品として人気です。",
-      image: "/product/02/01.png",
-    },
-    {
-      name: "アクリルキーホルダー",
-      category: "アクリルグッズ",
-      description: "実用性と視覚的訴求を両立したアクセサリー。",
-      detail: "厚みと高精細印刷による視覚的なインパクトが特徴。日常使いのアイテムとしても優れた訴求効果があります。",
-      image: "/product/02/02.png",
-    },
-    {
-      name: "アクリル観覧車",
-      category: "アクリルグッズ",
-      description: "可動性と装飾性を備えた立体構造。",
-      detail: "アクリルパーツを使用した回転式のディスプレイ型アイテム。複数キャラクターを一体で展開できます。",
-      image: "/product/02/03.png",
-    },
-    {
-      name: "アクリルバイキング",
-      category: "アクリルグッズ",
-      description: "ダイナミックな演出が可能な可動タイプ。",
-      detail: "可動性を持たせた仕様で、視覚的に動きのある演出が可能。遊び心と高級感を両立しています。",
-      image: "/product/02/05.png",
-    },
-    {
-      name: "アクリルブランコ",
-      category: "アクリルグッズ",
-      description: "柔らかな動きが視覚的効果を高めます。",
-      detail: "キャラクターやモチーフがゆらゆらと揺れる仕掛け付き。癒し効果と独自性を兼ね備えた商品です。",
-      image: "/product/02/06.png",
-    },
-    // 周辺グッズ
-    {
-      name: "缶バッジスタンド_サークル",
-      category: "周辺グッズ",
-      description: "丸型缶バッジの展示に最適な専用台座。",
-      detail: "円形缶バッジの展示に特化した専用スタンド。シンプルな構造で、イベントや店頭でも扱いやすい設計です。",
-      image: "/product/03/01.png",
-    },
-    {
-      name: "缶バッジスタンド_ハート",
-      category: "周辺グッズ",
-      description: "ハート型バッジを美しく飾る専用設計。",
-      detail: "ハート型缶バッジの形状にフィットした専用スタンド。製品の魅力を最大限に引き出す什器として活用できます。",
-      image: "/product/03/02.png",
-    },
-  ]
 
-  const categories = ["全て", "ZIGZAGグッズ", "アクリルグッズ", "周辺グッズ"]
+  const categories = ["ALL", "缶バッジ", "アクリル", "その他"]
 
-  const filteredProducts = selectedCategory === "全て" 
+  const filteredProducts = selectedCategory === "ALL" 
     ? allProducts 
     : allProducts.filter(product => product.category === selectedCategory)
+
+  const handleProductClick = (product: Product) => {
+    router.push(`/product/${encodeURIComponent(product.name)}`)
+  }
+
 
   return (
     <section 
@@ -131,10 +50,10 @@ export default function IntegratedProductSection() {
         {/* セクションヘッダー */}
         <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            商品<span className="text-primary">ラインナップ</span>
+            ZIGZAG<span className="text-primary">グッズ</span>
           </h2>
           <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-            高品質なオリジナルグッズを豊富に取り揃えています
+            身に着けても飾っても目を引く、高品質なオリジナルグッズ。
           </p>
         </div>
 
@@ -159,49 +78,39 @@ export default function IntegratedProductSection() {
 
         {/* 商品ギャラリー */}
         <div className={`transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {filteredProducts.map((product, index) => (
               <div 
                 key={product.name}
-                className={`group bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${
+                onClick={() => handleProductClick(product)}
+                className={`group cursor-pointer bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{ 
                   transitionDelay: isVisible ? `${index * 100}ms` : '0s' 
                 }}
               >
-                {/* 商品画像 */}
-                <div className="relative aspect-square bg-gradient-to-br from-primary/10 to-secondary/10 overflow-hidden">
+                {/* 商品画像 - Square */}
+                <div className="relative aspect-square bg-white overflow-hidden">
                   <Image 
-                    src={product.image}
+                    src={product.mainImage}
                     alt={product.name}
                     fill
                     className="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
                   />
-                  {/* カテゴリバッジ */}
-                  <div className="absolute top-3 right-3">
-                    <span className="bg-primary/90 text-primary-foreground text-xs px-2 py-1 rounded-full font-medium">
-                      {product.category}
-                    </span>
-                  </div>
                 </div>
 
                 {/* 商品情報 */}
-                <div className="p-4">
-                  <h3 className="font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+                <div className="p-3">
+                  <h3 className="font-bold text-foreground text-sm mb-1 group-hover:text-primary transition-colors duration-300 line-clamp-2">
                     {product.name}
                   </h3>
-                  <p className="text-sm text-foreground/70 leading-relaxed mb-2">
-                    {product.description}
-                  </p>
-                  <p className="text-xs text-foreground/60 leading-relaxed">
-                    {product.detail}
-                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
+
 
         {/* CTA */}
         <div className="text-center mt-12">
@@ -209,12 +118,30 @@ export default function IntegratedProductSection() {
             <p className="text-foreground/70 mb-6">
               お見積り・ご相談はお気軽にお問い合わせください
             </p>
-            <button className="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 hover:scale-105 shadow-lg">
+            <button 
+              onClick={() => {
+                const section = document.getElementById('contact-section')
+                if (section) {
+                  section.scrollIntoView({ behavior: 'smooth' })
+                }
+              }}
+              className="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 hover:scale-105 shadow-lg"
+            >
               お問い合わせ
             </button>
           </div>
         </div>
       </div>
+      
+      <style jsx>{`
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.5s ease-out;
+        }
+      `}</style>
     </section>
   )
 }

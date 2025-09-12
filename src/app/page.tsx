@@ -10,9 +10,9 @@ export default function Index() {
   return (
     <div className="min-h-screen">
       <HeroSection />
+      <IntegratedProductSection />
       <StrengthsSection />
       {/* <QualityShowcase /> */}
-      <IntegratedProductSection />
       <ProcessSection />
       <NewsSection />
       <ContactSection />  
