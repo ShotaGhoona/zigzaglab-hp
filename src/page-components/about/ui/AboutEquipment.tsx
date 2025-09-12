@@ -99,13 +99,13 @@ export default function AboutEquipment() {
           </div>
         </div>
 
-        {/* Equipment Scroll Container */}
-        <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="flex gap-6 overflow-x-auto scrollbar-hide pb-4">
+        {/* Equipment Grid Container */}
+        <div className={`container mx-auto max-w-6xl transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 items-stretch">
             {equipment.map((item, index) => (
               <div 
                 key={`${item.name}-${index}`}
-                className="flex-none w-80 group relative"
+                className="group relative"
               >
                 {/* Modern geometric card */}
                 <div className="relative bg-white overflow-hidden shadow-xl hover:shadow-3xl transition-all duration-700 h-full flex flex-col">
@@ -129,12 +129,6 @@ export default function AboutEquipment() {
                          }}
                     ></div>
                     
-                    {/* Count badge */}
-                    <div className="absolute top-6 right-6">
-                      <div className="relative w-12 h-12 bg-white/95 backdrop-blur-sm flex items-center justify-center text-gray-800 font-bold text-sm shadow-lg transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
-                        {item.count}台
-                      </div>
-                    </div>
                   </div>
 
                   {/* Content */}
@@ -146,10 +140,13 @@ export default function AboutEquipment() {
                          }}
                     ></div>
                     
-                    <div className="flex items-center gap-3 mt-4 flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors duration-300 flex-1">
+                    <div className="mt-4 flex-1">
+                      <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors duration-300 mb-2">
                         {item.name}
                       </h3>
+                      <p className="text-sm text-gray-600 font-medium">
+                        {item.count}台保有
+                      </p>
                     </div>
                     
                     {/* Corner accent - subtle geometric element */}
@@ -175,15 +172,6 @@ export default function AboutEquipment() {
 
       </div>
 
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </section>
   )
 }
