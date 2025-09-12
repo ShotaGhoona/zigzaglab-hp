@@ -101,23 +101,14 @@ export default function NewsDetail({ newsId }: NewsDetailProps) {
             <div className={`mb-12 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <h3 className="text-lg font-semibold text-foreground mb-4">タグ</h3>
               <div className="flex flex-wrap gap-2">
-                {newsData.tags?.map((tag: any, index: any) => (
+                {newsData.tags?.map((tag: string | { id?: string; tag_name?: string }, index: number) => (
                   <span 
-                    key={tag.id || index}
+                    key={(typeof tag === 'object' && tag.id) || index}
                     className="px-3 py-1 bg-card/50 text-foreground/70 rounded-full text-sm border border-border/30"
                   >
                     #{typeof tag === "string" ? tag : tag.tag_name}
                   </span>
-                )) || (
-                  newsData.tags && Array.isArray(newsData.tags) && newsData.tags.map((tag: any, index: any) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-card/50 text-foreground/70 rounded-full text-sm border border-border/30"
-                    >
-                      #{typeof tag === "string" ? tag : tag.tag_name}
-                    </span>
-                  ))
-                )}
+                )) || null}
               </div>
             </div>
 

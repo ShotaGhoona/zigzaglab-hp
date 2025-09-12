@@ -1,11 +1,12 @@
 import ProductDetail from "@/page-components/product/ui/product-detail";
 
 interface ProductDetailPageProps {
-  params: {
+  params: Promise<{
     name: string;
-  };
+  }>;
 }
 
-export default function ProductDetailPage({ params }: ProductDetailPageProps) {
-  return <ProductDetail productName={params.name} />;
+export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
+  const { name } = await params;
+  return <ProductDetail productName={name} />;
 }
