@@ -94,7 +94,7 @@ export default function AboutEquipment() {
               保有<span className="text-primary">設備</span>
             </h2>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              最新の設備を導入し、高品質な製品づくりを実現しています。
+              最新の設備を導入し、高品質なモノづくりを実現しています。
             </p>
           </div>
         </div>
