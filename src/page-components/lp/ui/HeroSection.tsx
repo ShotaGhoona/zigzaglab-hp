@@ -282,7 +282,7 @@ export default function HeroSection05() {
       </div>
 
       {/* 浮遊商品画像 */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-20 hidden md:block">
         {floatingItems.map((item) => (
           <div
             key={item.id}

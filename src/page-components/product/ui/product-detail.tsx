@@ -254,7 +254,7 @@ export default function ProductDetail({ productName }: ProductDetailProps) {
                     if (section) {
                       router.push('/#contact-section')
                     } else {
-                      router.push('/')
+                      router.push('/#contact-section')
                     }
                   }}
                   className="w-full px-8 py-4 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 shadow-sm"

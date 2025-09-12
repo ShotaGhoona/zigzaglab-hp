@@ -33,7 +33,7 @@ export default function AboutHero() {
               <div className="text-sm text-foreground/60 uppercase tracking-wide">生産体制</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">45万個</div>
+              <div className="text-4xl font-bold text-primary mb-2">50万個</div>
               <div className="text-sm text-foreground/60 uppercase tracking-wide">月間対応可能</div>
             </div>
             <div className="text-center">

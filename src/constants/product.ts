@@ -109,7 +109,7 @@ export const allProducts: Product[] = [
     description: "缶バッジと一緒に小分け袋へ収まるほどのコンパクトサイズが魅力です。イベントやショップでの販売時にもセットしやすく、購入者がそのまま持ち帰ってすぐに飾れる便利さがあります。",
     images: ["/goods/goods_15_1.jpg", "/goods/goods_15_2.jpg", "/goods/goods_15_3.jpg"],
     mainImage: "/goods/goods_15_1.jpg",
-    is_active: true,
+    is_active: false,
   },
   // 掲載なし（is_active: false）の商品
   {

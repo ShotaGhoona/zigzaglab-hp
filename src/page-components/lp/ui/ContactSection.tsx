@@ -5,18 +5,25 @@ import { useEffect, useState } from "react"
 interface FormData {
   name: string
   company: string
+  position: string
   email: string
+  address: string
   phone: string
   category: string
   message: string
 }
 
+type ContactType = 'inquiry' | 'quote' | 'sample'
+
 export default function ContactSection() {
   const [isVisible, setIsVisible] = useState(false)
+  const [activeTab, setActiveTab] = useState<ContactType>('inquiry')
   const [formData, setFormData] = useState<FormData>({
     name: '',
     company: '',
+    position: '',
     email: '',
+    address: '',
     phone: '',
     category: '',
     message: ''
@@ -55,6 +62,43 @@ export default function ContactSection() {
     }))
   }
 
+  const getTabConfig = (tab: ContactType) => {
+    switch (tab) {
+      case 'inquiry':
+        return {
+          title: 'お問い合わせ',
+          showAddress: false,
+          addressRequired: false,
+          messageLabel: 'お問い合わせ内容',
+          messagePlaceholder: 'お問い合わせ内容をお書きください。'
+        }
+      case 'quote':
+        return {
+          title: '見積もり依頼',
+          showAddress: true,
+          addressRequired: false,
+          messageLabel: 'お問い合わせ内容',
+          messagePlaceholder: 'お見積りしたい商品や内容をお書きください。'
+        }
+      case 'sample':
+        return {
+          title: 'サンプル送付',
+          showAddress: true,
+          addressRequired: true,
+          messageLabel: '希望サンプル',
+          messagePlaceholder: '希望するサンプルがありましたらお書き下さい'
+        }
+      default:
+        return {
+          title: 'お問い合わせ',
+          showAddress: false,
+          addressRequired: false,
+          messageLabel: 'お問い合わせ内容',
+          messagePlaceholder: 'お問い合わせ内容をお書きください。'
+        }
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -66,7 +110,7 @@ export default function ContactSection() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, contactType: activeTab }),
       })
 
       const result = await response.json()
@@ -79,7 +123,9 @@ export default function ContactSection() {
         setFormData({
           name: '',
           company: '',
+          position: '',
           email: '',
+          address: '',
           phone: '',
           category: '',
           message: ''
@@ -121,9 +167,33 @@ export default function ContactSection() {
         {/* お問い合わせフォーム */}
         <div className={`transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="bg-card/30 backdrop-blur-sm rounded-3xl border border-border/20 p-8 md:p-12">
+            {/* タブナビゲーション */}
+            <div className="flex justify-center mb-10">
+              <div className="bg-background/50 backdrop-blur-sm p-2 rounded-2xl border border-border/20 inline-flex">
+                {[
+                  { key: 'inquiry' as ContactType, label: 'お問い合わせ' },
+                  { key: 'quote' as ContactType, label: '見積もり依頼' },
+                  { key: 'sample' as ContactType, label: 'サンプル送付' }
+                ].map((tab) => (
+                  <button
+                    key={tab.key}
+                    type="button"
+                    onClick={() => setActiveTab(tab.key)}
+                    className={`px-6 py-3 rounded-xl font-medium text-sm transition-all duration-300 ${
+                      activeTab === tab.key
+                        ? 'bg-primary text-primary-foreground shadow-lg'
+                        : 'text-foreground/70 hover:text-foreground hover:bg-background/30'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <div className="text-center mb-10">
               <h3 className="text-2xl font-light text-foreground mb-4">
-                お問い合わせ<span className="font-bold text-primary">フォーム</span>
+                {getTabConfig(activeTab).title}<span className="font-bold text-primary">フォーム</span>
               </h3>
               <p className="text-foreground/70 font-light">
                 下記フォームよりお気軽にお問い合わせください
@@ -159,7 +229,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    会社名（個人事業主の場合は個人とご記入ください） <span className="text-red-500">*</span>
+                    会社名 <span className="text-red-500">*</span>
                   </label>
                   <input 
                     type="text"
@@ -173,35 +243,55 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    メールアドレス <span className="text-red-500">*</span>
-                  </label>
-                  <input 
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 bg-background/50 border border-border/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
-                    placeholder="example@company.com"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    電話番号
-                  </label>
-                  <input 
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 bg-background/50 border border-border/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
-                    placeholder="03-1234-5678"
-                  />
-                </div>
+              {/* 役職フィールド */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  役職
+                </label>
+                <input 
+                  type="text"
+                  name="position"
+                  value={formData.position}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 bg-background/50 border border-border/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+                  placeholder="経営企画部 マネージャー"
+                />
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  メールアドレス <span className="text-red-500">*</span>
+                </label>
+                <input 
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 bg-background/50 border border-border/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+                  placeholder="example@company.com"
+                />
+              </div>
+
+              {/* 住所フィールド - タブによって表示制御 */}
+              {getTabConfig(activeTab).showAddress && (
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-2">
+                    {activeTab === 'sample' ? '送付先住所' : '住所'} 
+                    {getTabConfig(activeTab).addressRequired && <span className="text-red-500">*</span>}
+                    {activeTab === 'sample' && <span className="text-sm text-foreground/60 block">送付先の住所を記入して下さい</span>}
+                  </label>
+                  <textarea 
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                    required={getTabConfig(activeTab).addressRequired}
+                    rows={3}
+                    className="w-full px-4 py-3 bg-background/50 border border-border/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 resize-none"
+                    placeholder="〒123-4567 東京都渋谷区..."
+                  />
+                </div>
+              )}
 
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
@@ -223,7 +313,7 @@ export default function ContactSection() {
 
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
-                  お問い合わせ内容 <span className="text-red-500">*</span>
+                  {getTabConfig(activeTab).messageLabel} <span className="text-red-500">*</span>
                 </label>
                 <textarea 
                   name="message"
@@ -232,7 +322,7 @@ export default function ContactSection() {
                   required
                   rows={6}
                   className="w-full px-4 py-3 bg-background/50 border border-border/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 resize-none"
-                  placeholder="お問い合わせ内容をお書きください。"
+                  placeholder={getTabConfig(activeTab).messagePlaceholder}
                 ></textarea>
               </div>
 
@@ -242,7 +332,7 @@ export default function ContactSection() {
                   disabled={isSubmitting}
                   className="px-12 py-4 bg-primary text-primary-foreground rounded-xl font-medium text-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-primary/30 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
-                  {isSubmitting ? '送信中...' : 'お問い合わせを送信する'}
+                  {isSubmitting ? '送信中...' : `${getTabConfig(activeTab).title}を送信する`}
                 </button>
                 <p className="text-xs text-foreground/60 mt-4 font-light">
                   送信いただいた内容は、営業時間内にご返信いたします。

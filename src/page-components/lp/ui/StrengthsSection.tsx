@@ -33,7 +33,7 @@ export default function StrengthsSection() {
       category: "💎 オリジナル",
       title: "オリジナル商品",
       description: "市場のニーズに合わせた自社オリジナル商品を多数開発。",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop&crop=center",
+      image: "/strength/オリジナル商品.jpg",
       delay: "0s"
     },
     {
@@ -41,7 +41,7 @@ export default function StrengthsSection() {
       category: "🏭 一貫生産",
       title: "自社一貫生産",
       description: "自社の工場で一貫生産。小ロットの生産から大量生産まで対応可能です。",
-      image: "https://images.unsplash.com/photo-1565514020179-026b92b84bb6?w=400&h=300&fit=crop&crop=center",
+      image: "/strength/自社一貫生産.JPG",
       delay: "0.2s"
     },
     {
@@ -49,7 +49,7 @@ export default function StrengthsSection() {
       category: "✨ アクリル",
       title: "アクリル商品",
       description: "UVプリンタとレーザー加工機を導入し、高品質なアクリル製品も作成可能。",
-      image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop&crop=center",
+      image: "/strength/アクリル製品.jpeg",
       delay: "0.4s"
     },
     {
@@ -57,7 +57,7 @@ export default function StrengthsSection() {
       category: "🔍 品質管理",
       title: "品質管理",
       description: "クリーンルーム内での製造など徹底した品質管理を実施。",
-      image: "https://images.unsplash.com/photo-1576669801775-ff43c5ab079d?w=400&h=300&fit=crop&crop=center",
+      image: "/strength/品質管理.jpg",
       delay: "0.6s"
     }
   ]

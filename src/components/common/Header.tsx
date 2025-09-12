@@ -37,7 +37,7 @@ export default function RefinedHeader() {
         <nav className="hidden md:flex items-center space-x-8">
           {[
             { name: "強み", href: "#strengths-section" },
-            { name: "品質", href: "#quality-section" },
+            // { name: "品質", href: "#quality-section" },
             { name: "グッズ", href: "#integrated-product-section" },
             { name: "プロセス", href: "#process-section" },
             { name: "お問い合わせ", href: "#contact-section" },
