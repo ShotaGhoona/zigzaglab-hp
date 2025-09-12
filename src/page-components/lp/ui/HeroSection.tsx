@@ -9,18 +9,18 @@ export default function HeroSection05() {
   // 浮遊商品の設定パラメータ
   const floatingProductsConfig = {
     images: [
-      'goods_1_1.png',
-      'goods_3_2.png', 
-      'goods_3_3.png',
-      'goods_5_1.png',
-      'goods_9_1.png',
-      'goods_11_3.png',
-      'goods_14_3.png',
-      'goods_1_2.png',
-      'goods_1_3.png',
-      'goods_2_3.png',
-      'goods_6_1.png',
-      'goods_9_3.png'
+      'goods_1_1.png',       // 赤丸 - 左上
+      'goods_3_2.png',       // 赤丸 - 右上  
+      'goods_3_3.png',       // 赤丸 - 左中央
+      // 'goods_5_1.png',    // コメントアウト
+      'goods_9_1.png',       // 赤丸 - 左下
+      // 'goods_11_3.png',      
+      'goods_14_3.png',   
+      // 'goods_1_2.png',    // コメントアウト
+      // 'goods_1_3.png',    // コメントアウト
+      // 'goods_2_3.png',    // コメントアウト
+      'goods_6_1.png',       // 赤丸 - 小さいやつ
+      // 'goods_9_3.png'     // コメントアウト
     ],
     baseSize: 240, // ベースサイズ(px)
     moveRange: { x: 30, y: 20 }, // 移動範囲(px)
@@ -36,9 +36,9 @@ export default function HeroSection05() {
       }
     }
 
-    // 各商品の固定設定（中央基準）
+    // 各商品の固定設定（中央基準）- 赤丸で囲まれた商品のみ
     const itemConfigs = [
-      // goods_1_1.png - 左上
+      // goods_1_1.png - 左上 (赤丸)
       { 
         position: getCenterBasedPosition(-22, -30), // 中央から左に42%、上に30%
         size: 280,
@@ -47,7 +47,7 @@ export default function HeroSection05() {
         blur: 0,
         delay: 0
       },
-      // goods_3_2.png - 右上  
+      // goods_3_2.png - 右上 (赤丸) 
       {
         position: getCenterBasedPosition(15, -35), // 中央から右に35%、上に35%
         size: 220,
@@ -56,7 +56,7 @@ export default function HeroSection05() {
         blur: 0,
         delay: 1.5
       },
-      // goods_3_3.png - 左中央
+      // goods_3_3.png - 左中央 (赤丸)
       {
         position: getCenterBasedPosition(-35, 25), // 中央から左に45%、少し上に5%
         size: 400,
@@ -65,16 +65,7 @@ export default function HeroSection05() {
         blur: 0,
         delay: 3
       },
-      // goods_5_1.png - 右中央
-      {
-        position: getCenterBasedPosition(28, -10), // 中央から右に38%、上に10%
-        size: 240,
-        duration: 11,
-        opacity: 0.75,
-        blur: 0,
-        delay: 2
-      },
-      // goods_9_1.png - 左下
+      // goods_9_1.png - 左下 (赤丸)
       {
         position: getCenterBasedPosition(-20, 30), // 中央から左に40%、下に20%
         size: 400,
@@ -83,7 +74,7 @@ export default function HeroSection05() {
         blur: 0,
         delay: 4
       },
-      // goods_11_3.png - 右下
+      // goods_11_3.png - 右下 (赤丸)
       {
         position: getCenterBasedPosition(32, 18), // 中央から右に32%、下に18%
         size: 450,
@@ -92,44 +83,7 @@ export default function HeroSection05() {
         blur: 0,
         delay: 0.5
       },
-      // goods_14_3.png - 左中下
-      {
-        position: getCenterBasedPosition(-25, 5), // 中央から左に35%、下に8%
-        size: 250,
-        duration: 15,
-        opacity: 0.65,
-        blur: 0,
-        delay: 3.5
-      },
-      // goods_1_2.png - 左上奥
-      {
-        position: getCenterBasedPosition(-35, -15), 
-        size: 280,
-        duration: 16,
-        opacity: 0.6,
-        blur: 0,
-        delay: 2.5
-      },
-      // goods_1_3.png - 右上奥
-      {
-        position: getCenterBasedPosition(35, -35), 
-        size: 400,
-        duration: 12,
-        opacity: 0.65,
-        blur: 0,
-        delay: 4.5
-      },
-
-      // goods_2_3.png - 右中下
-      {
-        position: getCenterBasedPosition(45, 28), 
-        size: 220,
-        duration: 10,
-        opacity: 0.7,
-        blur: 0,
-        delay: 5
-      },
-      // goods_6_1.png - 右下奥
+      // goods_6_1.png - 右下奥 (赤丸)
       {
         position: getCenterBasedPosition(10, 35), 
         size: 100,
@@ -137,16 +91,9 @@ export default function HeroSection05() {
         opacity: 0.6,
         blur: 0,
         delay: 3.8
-      },
-      // goods_9_3.png - 左中上
-      {
-        position: getCenterBasedPosition(-45, 30), 
-        size: 170,
-        duration: 11,
-        opacity: 0.65,
-        blur: 0,
-        delay: 6
       }
+      // コメントアウトされた商品:
+      // goods_5_1.png, goods_14_3.png, goods_1_2.png, goods_1_3.png, goods_2_3.png, goods_9_3.png
     ]
 
     return floatingProductsConfig.images.map((image, index) => {

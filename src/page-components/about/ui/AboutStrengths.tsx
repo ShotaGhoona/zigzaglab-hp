@@ -200,36 +200,68 @@ export default function AboutStrengths() {
                     key={featureIndex} 
                     className="group relative"
                   >
-                    <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 border border-gray-100/50">
+                    {/* Modern geometric card */}
+                    <div className="relative bg-white overflow-hidden shadow-xl hover:shadow-3xl transition-all duration-700 h-full flex flex-col">
+                      {/* Geometric overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/5"></div>
+                      
                       {/* Image */}
                       <div className="relative aspect-[4/3] overflow-hidden">
-                        <div className={`absolute inset-0 bg-gradient-to-br ${strength.gradient} opacity-40`}></div>
+                        <div className={`absolute inset-0 bg-gradient-to-br ${strength.gradient} mix-blend-multiply opacity-60`}></div>
                         <Image 
                           src={feature.image}
                           alt={feature.title}
                           fill
                           className="object-cover transition-all duration-700 group-hover:scale-110"
                         />
-                        <div className="absolute top-4 right-4">
-                          <div className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-gray-700 font-bold text-lg shadow-lg">
+                        
+                        {/* Diagonal element */}
+                        <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-white/20 to-transparent"
+                             style={{
+                               clipPath: 'polygon(50% 0%, 100% 0%, 100% 50%)'
+                             }}
+                        ></div>
+                        
+                        {/* Number badge with geometric design */}
+                        <div className="absolute top-6 right-6">
+                          <div className="relative w-12 h-12 bg-white/95 backdrop-blur-sm flex items-center justify-center text-gray-800 font-bold text-lg shadow-2xl transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
                             {featureIndex + 1}
                           </div>
                         </div>
                       </div>
 
                       {/* Content */}
-                      <div className="p-8">
-                        <h4 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors duration-300">
+                      <div className="p-8 relative flex-1 flex flex-col">
+                        {/* Zigzag accent line */}
+                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-primary"
+                             style={{
+                               clipPath: 'polygon(0% 0%, 20% 100%, 40% 0%, 60% 100%, 80% 0%, 100% 100%, 100% 0%)'
+                             }}
+                        ></div>
+                        
+                        <h4 className="text-xl font-bold text-gray-900 mb-4 mt-4 group-hover:text-primary transition-colors duration-300">
                           {feature.title}
                         </h4>
-                        <p className="text-gray-600 leading-relaxed text-sm font-light">
+                        <p className="text-gray-600 leading-relaxed text-sm font-light flex-1">
                           {feature.description}
                         </p>
+                        
+                        {/* Corner accent - subtle geometric element */}
+                        <div className="absolute bottom-4 right-4 w-6 h-6 border-2 border-primary/20 transform rotate-45 group-hover:rotate-90 transition-transform duration-500"></div>
                       </div>
                     </div>
 
-                    {/* Decorative elements */}
-                    <div className="absolute -inset-4 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-3xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    {/* Floating geometric elements */}
+                    <div className="absolute -top-2 -left-2 w-4 h-4 bg-primary/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                         style={{
+                           clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)'
+                         }}
+                    ></div>
+                    <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                         style={{
+                           clipPath: 'polygon(0% 0%, 100% 0%, 100% 70%, 70% 100%, 0% 100%)'
+                         }}
+                    ></div>
                   </div>
                 ))}
               </div>
