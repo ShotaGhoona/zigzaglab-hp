@@ -229,11 +229,11 @@ export default function AboutStrengths() {
                         ></div>
                         
                         {/* Number badge with geometric design */}
-                        <div className="absolute top-6 right-6">
+                        {/* <div className="absolute top-6 right-6">
                           <div className="relative w-12 h-12 bg-white/95 backdrop-blur-sm flex items-center justify-center text-gray-800 font-bold text-lg shadow-2xl transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
                             {featureIndex + 1}
                           </div>
-                        </div>
+                        </div> */}
                       </div>
 
                       {/* Content */}
