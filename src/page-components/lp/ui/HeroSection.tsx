@@ -23,7 +23,7 @@ export default function HeroSection05() {
       // 'goods_9_3.png'     // コメントアウト
     ],
     baseSize: 240, // ベースサイズ(px)
-    moveRange: { x: 30, y: 20 }, // 移動範囲(px)
+    moveRange: { x: 8, y: 5 }, // 移動範囲(px) - 大幅に抑制
   }
 
   // 浮遊アイテムの固定配置とパラメータ
@@ -40,54 +40,54 @@ export default function HeroSection05() {
     const itemConfigs = [
       // goods_1_1.png - 左上 (赤丸)
       { 
-        position: getCenterBasedPosition(-22, -30), // 中央から左に42%、上に30%
-        size: 280,
-        duration: 12,
+        position: getCenterBasedPosition(-30, -30), // 中央から左に42%、上に30%
+        size: 380,
+        duration: 25,
         opacity: 0.75,
         blur: 0,
         delay: 0
       },
       // goods_3_2.png - 右上 (赤丸) 
       {
-        position: getCenterBasedPosition(15, -35), // 中央から右に35%、上に35%
-        size: 220,
-        duration: 10,
+        position: getCenterBasedPosition(25, -35), // 中央から右に35%、上に35%
+        size: 400,
+        duration: 22,
         opacity: 0.7,
         blur: 0,
         delay: 1.5
       },
       // goods_3_3.png - 左中央 (赤丸)
       {
-        position: getCenterBasedPosition(-35, 25), // 中央から左に45%、少し上に5%
+        position: getCenterBasedPosition(-40, 10), // 中央から左に45%、少し上に5%
         size: 400,
-        duration: 14,
+        duration: 28,
         opacity: 0.8,
         blur: 0,
         delay: 3
       },
       // goods_9_1.png - 左下 (赤丸)
       {
-        position: getCenterBasedPosition(-20, 30), // 中央から左に40%、下に20%
-        size: 400,
-        duration: 13,
+        position: getCenterBasedPosition(-25, 30), // 中央から左に40%、下に20%
+        size: 500,
+        duration: 26,
         opacity: 0.7,
         blur: 0,
         delay: 4
       },
       // goods_11_3.png - 右下 (赤丸)
       {
-        position: getCenterBasedPosition(32, 18), // 中央から右に32%、下に18%
-        size: 450,
-        duration: 9,
+        position: getCenterBasedPosition(35, 20), // 中央から右に32%、下に18%
+        size: 600,
+        duration: 20,
         opacity: 0.8,
         blur: 0,
         delay: 0.5
       },
       // goods_6_1.png - 右下奥 (赤丸)
       {
-        position: getCenterBasedPosition(10, 35), 
-        size: 100,
-        duration: 13,
+        position: getCenterBasedPosition(15, 35), 
+        size: 300,
+        duration: 26,
         opacity: 0.6,
         blur: 0,
         delay: 3.8
