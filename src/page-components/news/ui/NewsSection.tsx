@@ -56,7 +56,7 @@ export default function NewsSection() {
   return (
     <section 
       id="news-section"
-      className="py-16 px-4 bg-gradient-to-b from-primary/5 to-background"
+      className="py-24 px-6 bg-gradient-to-b from-background to-primary/5"
     >
       <div className="container mx-auto max-w-7xl">
         {/* セクションヘッダー */}
@@ -71,30 +71,29 @@ export default function NewsSection() {
 
         {/* ニュース一覧 */}
         <div className={`transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {featuredNews.map((news, index) => (
               <div 
                 key={news.id}
-                className={`group bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${
+                className={`group bg-white rounded-lg overflow-hidden shadow-sm border border-border/10 hover:shadow-md hover:border-border/30 hover:-translate-y-1 transition-all duration-300 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{ 
-                  transitionDelay: isVisible ? `${index * 150}ms` : '0s' 
+                  transitionDelay: isVisible ? `${index * 100}ms` : '0s' 
                 }}
               >
                 <Link href={`/news/${news.id}`}>
                   {/* ニュース画像 */}
-                  <div className="relative aspect-video overflow-hidden">
-                    <Image 
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <img 
                       src={news.featured_image_url}
                       alt={news.featured_image_alt}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     {/* カテゴリバッジ */}
                     <div className="absolute top-3 left-3">
                       <span 
-                        className="px-2 py-1 rounded-full text-xs font-medium text-white shadow-lg"
+                        className="px-3 py-1 rounded-lg text-xs font-medium text-white shadow-sm backdrop-blur-sm"
                         style={{ backgroundColor: getCategoryColor(news.category) }}
                       >
                         {news.category}
@@ -103,7 +102,7 @@ export default function NewsSection() {
                     {/* 注目記事バッジ */}
                     {news.is_featured && (
                       <div className="absolute top-3 right-3">
-                        <span className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full font-bold shadow-lg">
+                        <span className="bg-primary text-primary-foreground text-xs px-3 py-1 rounded-lg font-medium shadow-sm">
                           注目
                         </span>
                       </div>
@@ -111,24 +110,27 @@ export default function NewsSection() {
                   </div>
 
                   {/* ニュース情報 */}
-                  <div className="p-4">
-                    <div className="mb-2">
-                      <time className="text-xs text-foreground/60">
+                  <div className="p-5">
+                    <div className="mb-3">
+                      <time className="text-xs text-foreground/60 font-medium">
                         {formatDate(news.published_at)}
                       </time>
                     </div>
-                    <h3 className="font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-300 line-clamp-2 leading-tight">
+                    <h3 className="font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-300 line-clamp-2 leading-snug">
                       {news.title}
                     </h3>
-                    <p className="text-sm text-foreground/70 leading-relaxed line-clamp-3">
+                    <p className="text-sm text-foreground/70 leading-relaxed line-clamp-3 mb-4">
                       {news.excerpt}
                     </p>
                     
                     {/* 記事情報 */}
-                    <div className="flex justify-center mt-4 pt-3 border-t border-border/20">
+                    <div className="flex items-center justify-between pt-3 border-t border-border/10">
                       <span className="text-xs text-foreground/60">
                         {news.read_time_minutes}分で読める
                       </span>
+                      <svg className="w-4 h-4 text-foreground/40 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
                     </div>
                   </div>
                 </Link>
@@ -138,20 +140,22 @@ export default function NewsSection() {
         </div>
 
         {/* ニュース一覧へのCTA */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-16">
           <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <p className="text-foreground/70 mb-6">
-              他のニュースもご覧ください
-            </p>
-            <Link 
-              href="/news"
-              className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 hover:scale-105 shadow-lg"
-            >
-              ニュース一覧を見る
-              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
+            <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-lg border border-border/10 py-8 px-6">
+              <p className="text-foreground/70 mb-4 text-lg">
+                他のニュースもご覧ください
+              </p>
+              <Link 
+                href="/news"
+                className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 shadow-sm"
+              >
+                ニュース一覧を見る
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

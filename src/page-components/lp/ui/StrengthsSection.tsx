@@ -65,7 +65,7 @@ export default function StrengthsSection() {
   return (
     <section 
       id="strengths-section"
-      className="py-20 px-4 bg-gradient-to-b from-background to-background/50"
+      className="py-24 px-6 bg-gradient-to-b from-background to-primary/5"
     >
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
@@ -80,53 +80,49 @@ export default function StrengthsSection() {
           </div>
         </div>
 
-        {/* Strengths Grid - Completely Redesigned */}
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-8 lg:gap-10">
+        {/* Strengths Grid */}
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-8">
           {strengths.map((strength) => (
-            <Link href="/about">
-            <div
-              key={strength.id}
-              className={`group transition-all duration-1000 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
-              }`}
-              style={{ 
-                transitionDelay: isVisible ? strength.delay : '0s' 
-              }}
-            >
-              <div className="relative overflow-hidden bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 cursor-pointer group">
-                {/* Image Section */}
-                <div className="relative h-48 w-full overflow-hidden">
-                  <Image
-                    src={strength.image}
-                    alt={strength.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-500"></div>
-                  
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4">
-                    <div className="bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                      <span className="text-sm font-medium text-gray-800">{strength.category}</span>
+            <Link href="/about" key={strength.id}>
+              <div
+                className={`group transition-all duration-1000 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+                }`}
+                style={{ 
+                  transitionDelay: isVisible ? strength.delay : '0s' 
+                }}
+              >
+                <div className="relative overflow-hidden bg-white rounded-lg shadow-sm border border-border/10 hover:shadow-md hover:border-border/30 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                  {/* Image Section */}
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={strength.image}
+                      alt={strength.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-all duration-300"></div>
+                    
+                    {/* Category Badge */}
+                    <div className="absolute top-3 left-3">
+                      <div className="bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-border/20">
+                        <span className="text-xs font-medium text-foreground">{strength.category}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Content Section */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors duration-300">
-                    {strength.title}
-                  </h3>
-                  
-                  <p className="text-sm text-gray-600 leading-relaxed">
-                    {strength.description}
-                  </p>
+                  {/* Content Section */}
+                  <div className="p-6">
+                    <h3 className="text-lg font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                      {strength.title}
+                    </h3>
+                    
+                    <p className="text-sm text-foreground/70 leading-relaxed">
+                      {strength.description}
+                    </p>
+                  </div>
                 </div>
-
-                {/* Hover Effect Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
               </div>
-            </div>
             </Link>
           ))}
         </div>
@@ -134,25 +130,25 @@ export default function StrengthsSection() {
         {/* About詳細ページへのCTA */}
         <div className="text-center mt-16">
           <div className={`transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <Link 
-              href="/about"
-              className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 hover:scale-105 shadow-lg"
-            >
-              詳しく見る
-              <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
+            <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-lg border border-border/10 py-8 px-6">
+              <p className="text-foreground/70 mb-4">ZIGZAGLabの詳しい情報をご覧ください</p>
+              <Link 
+                href="/about"
+                className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 shadow-sm"
+              >
+                詳しく見る
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Next-Level Background Decorative Elements */}
+        {/* 背景装飾 */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-1/6 left-1/12 w-60 h-60 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-red-500/15 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/6 right-1/12 w-48 h-48 bg-gradient-to-r from-emerald-500/15 via-teal-500/10 to-blue-500/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-36 h-36 bg-gradient-to-r from-purple-500/10 via-blue-500/15 to-cyan-500/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: '3s' }}></div>
-          <div className="absolute top-1/3 right-1/4 w-28 h-28 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute bottom-1/3 left-1/4 w-32 h-32 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: '2.5s' }}></div>
+          <div className="absolute top-1/6 left-1/12 w-32 h-32 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full blur-2xl animate-pulse"></div>
+          <div className="absolute bottom-1/6 right-1/12 w-24 h-24 bg-gradient-to-r from-secondary/10 to-primary/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: '2s' }}></div>
         </div>
       </div>
     </section>

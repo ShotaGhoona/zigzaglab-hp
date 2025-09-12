@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
-import { allProducts, type Product } from "@/constants/product"
+import { getActiveProducts, categories, type Product } from "@/constants/product"
 
 export default function IntegratedProductSection() {
   const [selectedCategory, setSelectedCategory] = useState("ALL")
@@ -30,11 +30,11 @@ export default function IntegratedProductSection() {
     return () => observer.disconnect()
   }, [])
 
-  const categories = ["ALL", "缶バッジ", "アクリル", "その他"]
-
+  const activeProducts = getActiveProducts()
+  
   const filteredProducts = selectedCategory === "ALL" 
-    ? allProducts 
-    : allProducts.filter(product => product.category === selectedCategory)
+    ? activeProducts 
+    : activeProducts.filter(product => product.category === selectedCategory)
 
   const handleProductClick = (product: Product) => {
     router.push(`/product/${encodeURIComponent(product.name)}`)
@@ -58,15 +58,15 @@ export default function IntegratedProductSection() {
         </div>
 
         {/* カテゴリフィルター */}
-        <div className={`flex justify-center mb-8 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="flex flex-wrap gap-2 p-2 bg-card/50 rounded-xl">
+        <div className={`flex justify-center mb-12 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="flex flex-wrap gap-1 p-1 bg-white border border-border/20 rounded-lg shadow-sm">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-lg font-medium transition-all duration-300 ${
+                className={`px-8 py-3 font-medium transition-all duration-300 rounded-md ${
                   selectedCategory === category
-                    ? 'bg-primary text-primary-foreground shadow-md'
+                    ? 'bg-primary text-primary-foreground shadow-sm'
                     : 'text-foreground/70 hover:text-foreground hover:bg-foreground/5'
                 }`}
               >
@@ -78,33 +78,50 @@ export default function IntegratedProductSection() {
 
         {/* 商品ギャラリー */}
         <div className={`transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {filteredProducts.map((product, index) => (
               <div 
-                key={product.name}
+                key={product.id}
                 onClick={() => handleProductClick(product)}
-                className={`group cursor-pointer bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${
+                className={`group cursor-pointer bg-white border border-border/10 hover:border-border/30 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 rounded-lg ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{ 
-                  transitionDelay: isVisible ? `${index * 100}ms` : '0s' 
+                  transitionDelay: isVisible ? `${index * 80}ms` : '0s' 
                 }}
               >
-                {/* 商品画像 - Square */}
-                <div className="relative aspect-square bg-white overflow-hidden">
+                {/* 商品画像 */}
+                <div className="relative aspect-[4/3] bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
                   <Image 
                     src={product.mainImage}
                     alt={product.name}
                     fill
-                    className="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                    className="object-contain p-6 group-hover:scale-105 transition-transform duration-300"
                   />
+                  {/* カテゴリバッジ */}
+                  <div className="absolute top-3 left-3">
+                    <span className="bg-white/90 backdrop-blur-sm text-foreground/80 text-xs px-2 py-1 rounded-md font-medium border border-border/20">
+                      {product.category}
+                    </span>
+                  </div>
                 </div>
 
                 {/* 商品情報 */}
-                <div className="p-3">
-                  <h3 className="font-bold text-foreground text-sm mb-1 group-hover:text-primary transition-colors duration-300 line-clamp-2">
+                <div className="p-5">
+                  <h3 className="font-semibold text-foreground text-base mb-2 group-hover:text-primary transition-colors duration-300 line-clamp-2 leading-snug">
                     {product.name}
                   </h3>
+                  <p className="text-sm text-foreground/60 line-clamp-2 leading-relaxed">
+                    {product.subtitle}
+                  </p>
+                  
+                  {/* 詳細を見るアロー */}
+                  <div className="flex items-center justify-end mt-4 text-primary group-hover:translate-x-1 transition-transform duration-300">
+                    <span className="text-xs font-medium mr-1">詳細を見る</span>
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
                 </div>
               </div>
             ))}
@@ -112,36 +129,8 @@ export default function IntegratedProductSection() {
         </div>
 
 
-        {/* CTA */}
-        <div className="text-center mt-12">
-          <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <p className="text-foreground/70 mb-6">
-              お見積り・ご相談はお気軽にお問い合わせください
-            </p>
-            <button 
-              onClick={() => {
-                const section = document.getElementById('contact-section')
-                if (section) {
-                  section.scrollIntoView({ behavior: 'smooth' })
-                }
-              }}
-              className="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 hover:scale-105 shadow-lg"
-            >
-              お問い合わせ
-            </button>
-          </div>
-        </div>
       </div>
       
-      <style jsx>{`
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-          animation: fade-in 0.5s ease-out;
-        }
-      `}</style>
     </section>
   )
 }
