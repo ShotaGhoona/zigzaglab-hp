@@ -85,18 +85,18 @@ export default function StrengthsSection() {
         </div>
 
         {/* Strengths Grid */}
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-8">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-8 items-stretch">
           {strengths.map((strength) => (
-            <Link href={`/about#${strength.anchor}`} key={strength.id}>
+            <Link href={`/about#${strength.anchor}`} key={strength.id} className="h-full">
               <div
-                className={`group transition-all duration-1000 ${
+                className={`group transition-all duration-1000 h-full ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
                 }`}
                 style={{ 
                   transitionDelay: isVisible ? strength.delay : '0s' 
                 }}
               >
-                <div className="relative overflow-hidden bg-white rounded-lg shadow-sm border border-border/10 hover:shadow-md hover:border-border/30 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div className="relative overflow-hidden bg-white rounded-lg shadow-sm border border-border/10 hover:shadow-md hover:border-border/30 hover:-translate-y-1 transition-all duration-300 cursor-pointer h-full flex flex-col">
                   {/* Image Section */}
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
@@ -116,12 +116,12 @@ export default function StrengthsSection() {
                   </div>
 
                   {/* Content Section */}
-                  <div className="p-6">
+                  <div className="p-6 flex-1 flex flex-col">
                     <h3 className="text-lg font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
                       {strength.title}
                     </h3>
                     
-                    <p className="text-sm text-foreground/70 leading-relaxed">
+                    <p className="text-sm text-foreground/70 leading-relaxed flex-1">
                       {strength.description}
                     </p>
                   </div>

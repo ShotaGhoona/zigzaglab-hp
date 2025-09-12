@@ -91,7 +91,7 @@ export default function AboutEquipment() {
         <div className="text-center mb-16">
           <div className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              使用<span className="text-primary">機材</span>
+              保有<span className="text-primary">機材</span>
             </h2>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
               最新の機材を導入し、高品質な製品づくりを実現しています。
@@ -147,20 +147,9 @@ export default function AboutEquipment() {
                     ></div>
                     
                     <div className="flex items-center gap-3 mt-4 flex-1">
-                      <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors duration-300 flex-shrink-0">
-                        {item.icon}
-                      </div>
                       <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors duration-300 flex-1">
                         {item.name}
                       </h3>
-                    </div>
-                    
-                    {/* Progress bar */}
-                    <div className="h-2 bg-border/20 rounded-full overflow-hidden mt-4">
-                      <div 
-                        className="h-full bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-700 group-hover:scale-x-110"
-                        style={{ width: `${Math.min((item.count / 30) * 100, 100)}%` }}
-                      ></div>
                     </div>
                     
                     {/* Corner accent - subtle geometric element */}
