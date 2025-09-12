@@ -1,9 +1,172 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Image from "next/image"
 
 export default function HeroSection05() {
   const [mounted, setMounted] = useState(false)
+
+  // 浮遊商品の設定パラメータ
+  const floatingProductsConfig = {
+    images: [
+      'goods_1_1.png',
+      'goods_3_2.png', 
+      'goods_3_3.png',
+      'goods_5_1.png',
+      'goods_9_1.png',
+      'goods_11_3.png',
+      'goods_14_3.png',
+      'goods_1_2.png',
+      'goods_1_3.png',
+      'goods_2_3.png',
+      'goods_6_1.png',
+      'goods_9_3.png'
+    ],
+    baseSize: 240, // ベースサイズ(px)
+    moveRange: { x: 30, y: 20 }, // 移動範囲(px)
+  }
+
+  // 浮遊アイテムの固定配置とパラメータ
+  const generateFloatingItems = () => {
+    // 中央基準の位置計算関数
+    const getCenterBasedPosition = (centerX: number, centerY: number) => {
+      return {
+        left: 50 + centerX, // 中央(50%)からの相対位置
+        top: 50 + centerY   // 中央(50%)からの相対位置  
+      }
+    }
+
+    // 各商品の固定設定（中央基準）
+    const itemConfigs = [
+      // goods_1_1.png - 左上
+      { 
+        position: getCenterBasedPosition(-22, -30), // 中央から左に42%、上に30%
+        size: 280,
+        duration: 12,
+        opacity: 0.75,
+        blur: 0,
+        delay: 0
+      },
+      // goods_3_2.png - 右上  
+      {
+        position: getCenterBasedPosition(15, -35), // 中央から右に35%、上に35%
+        size: 220,
+        duration: 10,
+        opacity: 0.7,
+        blur: 0,
+        delay: 1.5
+      },
+      // goods_3_3.png - 左中央
+      {
+        position: getCenterBasedPosition(-35, 25), // 中央から左に45%、少し上に5%
+        size: 400,
+        duration: 14,
+        opacity: 0.8,
+        blur: 0,
+        delay: 3
+      },
+      // goods_5_1.png - 右中央
+      {
+        position: getCenterBasedPosition(28, -10), // 中央から右に38%、上に10%
+        size: 240,
+        duration: 11,
+        opacity: 0.75,
+        blur: 0,
+        delay: 2
+      },
+      // goods_9_1.png - 左下
+      {
+        position: getCenterBasedPosition(-20, 30), // 中央から左に40%、下に20%
+        size: 400,
+        duration: 13,
+        opacity: 0.7,
+        blur: 0,
+        delay: 4
+      },
+      // goods_11_3.png - 右下
+      {
+        position: getCenterBasedPosition(32, 18), // 中央から右に32%、下に18%
+        size: 450,
+        duration: 9,
+        opacity: 0.8,
+        blur: 0,
+        delay: 0.5
+      },
+      // goods_14_3.png - 左中下
+      {
+        position: getCenterBasedPosition(-25, 5), // 中央から左に35%、下に8%
+        size: 250,
+        duration: 15,
+        opacity: 0.65,
+        blur: 0,
+        delay: 3.5
+      },
+      // goods_1_2.png - 左上奥
+      {
+        position: getCenterBasedPosition(-35, -15), 
+        size: 280,
+        duration: 16,
+        opacity: 0.6,
+        blur: 0,
+        delay: 2.5
+      },
+      // goods_1_3.png - 右上奥
+      {
+        position: getCenterBasedPosition(35, -35), 
+        size: 400,
+        duration: 12,
+        opacity: 0.65,
+        blur: 0,
+        delay: 4.5
+      },
+
+      // goods_2_3.png - 右中下
+      {
+        position: getCenterBasedPosition(45, 28), 
+        size: 220,
+        duration: 10,
+        opacity: 0.7,
+        blur: 0,
+        delay: 5
+      },
+      // goods_6_1.png - 右下奥
+      {
+        position: getCenterBasedPosition(10, 35), 
+        size: 100,
+        duration: 13,
+        opacity: 0.6,
+        blur: 0,
+        delay: 3.8
+      },
+      // goods_9_3.png - 左中上
+      {
+        position: getCenterBasedPosition(-45, 30), 
+        size: 170,
+        duration: 11,
+        opacity: 0.65,
+        blur: 0,
+        delay: 6
+      }
+    ]
+
+    return floatingProductsConfig.images.map((image, index) => {
+      const config = itemConfigs[index]
+      
+      return {
+        id: index,
+        image,
+        size: config.size,
+        duration: config.duration,
+        opacity: config.opacity,
+        blur: config.blur,
+        delay: config.delay,
+        left: config.position.left,
+        top: config.position.top
+      }
+    })
+  }
+
+  const floatingItems = generateFloatingItems()
 
   useEffect(() => {
     setMounted(true)
@@ -118,6 +281,40 @@ export default function HeroSection05() {
         ))}
       </div>
 
+      {/* 浮遊商品画像 */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
+        {floatingItems.map((item) => (
+          <div
+            key={item.id}
+            className={`absolute transition-all duration-2000 ${
+              mounted ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{
+              left: `${item.left}%`,
+              top: `${item.top}%`,
+              width: `${item.size}px`,
+              height: `${item.size}px`,
+              opacity: mounted ? item.opacity : 0,
+              filter: `blur(${item.blur}px)`,
+              animation: mounted 
+                ? `productFloat${item.id} ${item.duration}s ease-in-out infinite`
+                : 'none',
+              animationDelay: `${item.delay}s`,
+              transform: 'translate(-50%, -50%)', // 中心基準で配置
+            }}
+          >
+            <Image
+              src={`/goods-transparent/${item.image}`}
+              alt="フローティング商品"
+              width={item.size}
+              height={item.size}
+              className="w-full h-full object-contain drop-shadow-sm"
+              priority={false}
+            />
+          </div>
+        ))}
+      </div>
+
       {/* メインコンテンツ */}
       <div className="relative z-10 text-center px-6">
         <div className={`transition-all duration-1000 ease-out ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -197,6 +394,22 @@ export default function HeroSection05() {
           50% { transform: translateY(-3px) translateX(-6px); }
           75% { transform: translateY(-15px) translateX(12px); }
         }
+        ${floatingItems.map(item => `
+          @keyframes productFloat${item.id} {
+            0%, 100% { 
+              transform: translate(-50%, -50%) translateX(0px) translateY(0px) rotate(0deg);
+            }
+            25% { 
+              transform: translate(-50%, -50%) translateX(${floatingProductsConfig.moveRange.x * 0.7}px) translateY(-${floatingProductsConfig.moveRange.y * 0.8}px) rotate(2deg);
+            }
+            50% { 
+              transform: translate(-50%, -50%) translateX(-${floatingProductsConfig.moveRange.x * 0.5}px) translateY(-${floatingProductsConfig.moveRange.y}px) rotate(-1deg);
+            }
+            75% { 
+              transform: translate(-50%, -50%) translateX(-${floatingProductsConfig.moveRange.x * 0.8}px) translateY(${floatingProductsConfig.moveRange.y * 0.6}px) rotate(3deg);
+            }
+          }
+        `).join('')}
       `}</style>
     </section>
   )
