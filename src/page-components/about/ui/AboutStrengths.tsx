@@ -29,6 +29,7 @@ export default function AboutStrengths() {
   const strengths = [
     {
       id: 1,
+      anchor: "original",
       title: "オリジナル商品",
       subtitle: "常に新しい発想から、自社オリジナル商品を開発。",
       features: [
@@ -59,6 +60,7 @@ export default function AboutStrengths() {
     },
     {
       id: 2,
+      anchor: "integrated",
       title: "自社一貫生産",
       subtitle: "自社の工場で一貫生産。印刷から梱包まで。",
       features: [
@@ -89,6 +91,7 @@ export default function AboutStrengths() {
     },
     {
       id: 3,
+      anchor: "acrylic",
       title: "アクリル製品",
       subtitle: "UVプリンタとレーザー加工機を導入し、高品質なアクリル製品を作成",
       features: [
@@ -119,6 +122,7 @@ export default function AboutStrengths() {
     },
     {
       id: 4,
+      anchor: "quality",
       title: "品質管理",
       subtitle: "クリーンルーム内での製造など徹底した品質管理を実施。",
       features: [
@@ -173,11 +177,13 @@ export default function AboutStrengths() {
           {strengths.map((strength, index) => (
             <div 
               key={strength.id}
+              id={strength.anchor}
               className={`transition-all duration-1000 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
               }`}
               style={{ 
-                transitionDelay: isVisible ? `${index * 200}ms` : '0s' 
+                transitionDelay: isVisible ? `${index * 200}ms` : '0s',
+                scrollMarginTop: '200px'
               }}
             >
               {/* Section Header */}

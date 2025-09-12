@@ -34,7 +34,8 @@ export default function StrengthsSection() {
       title: "オリジナル商品",
       description: "市場のニーズに合わせた自社オリジナル商品を多数開発。",
       image: "/strength/オリジナル商品.jpg",
-      delay: "0s"
+      delay: "0s",
+      anchor: "original"
     },
     {
       id: 2,
@@ -42,7 +43,8 @@ export default function StrengthsSection() {
       title: "自社一貫生産",
       description: "自社の工場で一貫生産。小ロットの生産から大量生産まで対応可能です。",
       image: "/strength/自社一貫生産.JPG",
-      delay: "0.2s"
+      delay: "0.2s",
+      anchor: "integrated"
     },
     {
       id: 3,
@@ -50,7 +52,8 @@ export default function StrengthsSection() {
       title: "アクリル商品",
       description: "UVプリンタとレーザー加工機を導入し、高品質なアクリル製品も作成可能。",
       image: "/strength/アクリル製品.jpeg",
-      delay: "0.4s"
+      delay: "0.4s",
+      anchor: "acrylic"
     },
     {
       id: 4,
@@ -58,7 +61,8 @@ export default function StrengthsSection() {
       title: "品質管理",
       description: "クリーンルーム内での製造など徹底した品質管理を実施。",
       image: "/strength/品質管理.jpg",
-      delay: "0.6s"
+      delay: "0.6s",
+      anchor: "quality"
     }
   ]
 
@@ -83,7 +87,7 @@ export default function StrengthsSection() {
         {/* Strengths Grid */}
         <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-8">
           {strengths.map((strength) => (
-            <Link href="/about" key={strength.id}>
+            <Link href={`/about#${strength.anchor}`} key={strength.id}>
               <div
                 className={`group transition-all duration-1000 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
