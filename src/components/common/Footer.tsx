@@ -38,6 +38,12 @@ export default function ZigZagLabFooter() {
             <p className="text-xl text-secondary-foreground/80 max-w-3xl mx-auto leading-relaxed font-light">
               技術力と品質管理で、お客様のアイディアを最高の形で実現します。
             </p>
+            <div className="mt-8 text-center">
+              <p className="text-secondary-foreground/70 font-light">
+                〒590-0006<br />
+                大阪府堺市堺区錦綾町1-8-19
+              </p>
+            </div>
           </div>
         </div>
 
