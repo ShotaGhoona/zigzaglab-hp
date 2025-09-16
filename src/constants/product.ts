@@ -34,7 +34,6 @@ export const allProducts: Product[] = [
     mainImage: "/goods/goods_2_1.jpg",
     is_active: true,
   },
-  
   {
     id: 3,
     product_code: "KSWB",
@@ -53,8 +52,8 @@ export const allProducts: Product[] = [
     category: "多機能缶バッジ",
     subtitle: "安全ピン＆スタンド付きで、身につけるも飾るも自由な缶バッジ。",
     description: "ピンで洋服やバッグに取り付ければ、手軽にお気に入りのデザインを身につけることができます。また、スタンドを使えば、デスクや棚に立てかけて飾ることも可能。スタンドは使わない時には折りたためて使用できます。特許出願済み",
-    images: ["/goods/goods_5_1.jpg", "/goods/goods_5_2.jpg", "/goods/goods_5_3.jpg"],
-    mainImage: "/goods/goods_5_1.jpg",
+    images: ["/goods/goods_5_1-new.jpg", "/goods/goods_5_2.jpg", "/goods/goods_5_3.jpg"],
+    mainImage: "/goods/goods_5_1-new.jpg",
     is_active: true,
   },
   {
@@ -64,8 +63,8 @@ export const allProducts: Product[] = [
     category: "多機能缶バッジ",
     subtitle: "ストラップにもディスプレイにも、スタンド付き缶ストラップ。",
     description: "ストラップとして日常的に持ち歩けるだけでなく、スタンドを利用することでディスプレイとしても活用できる2WAY仕様です。ヒンジやスタンドは使わない時には折りたためて使用できます。特許出願済み",
-    images: ["/goods/goods_6_1.jpg", "/goods/goods_6_2.jpg", "/goods/goods_6_3.jpg"],
-    mainImage: "/goods/goods_6_1.jpg",
+    images: ["/goods/goods_6_1-new.jpg", "/goods/goods_6_2.jpg", "/goods/goods_6_3.jpg"],
+    mainImage: "/goods/goods_6_1-new.jpg",
     is_active: true,
   },
   {
