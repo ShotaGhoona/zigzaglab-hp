@@ -32,7 +32,7 @@ export default function StrengthsSection() {
       id: 1,
       category: "💎 オリジナル",
       title: "オリジナル商品",
-      description: "市場のニーズに合わせた自社オリジナル商品を多数開発。",
+      description: "独自オリジナル製品を企画・開発し、これまでにない新しい製品やサービスを提供します。",
       image: "/strength/オリジナル商品.jpg",
       delay: "0s",
       anchor: "original"
@@ -41,7 +41,7 @@ export default function StrengthsSection() {
       id: 2,
       category: "🏭 一貫生産",
       title: "自社一貫生産",
-      description: "自社の工場で一貫生産。小ロットの生産から大量生産まで対応可能です。",
+      description: "自社の工場で印刷から梱包まで一貫生産。小ロット～大ロットまで対応可能です。",
       image: "/strength/自社一貫生産.JPG",
       delay: "0.2s",
       anchor: "integrated"
@@ -50,7 +50,7 @@ export default function StrengthsSection() {
       id: 3,
       category: "✨ アクリル",
       title: "アクリル商品",
-      description: "UVプリンタとレーザー加工機を導入し、高品質なアクリル製品も作成可能。",
+      description: "UVプリンタとレーザー加工機を保有し、高品質なアクリル製品を作成可能。",
       image: "/strength/アクリル製品.jpeg",
       delay: "0.4s",
       anchor: "acrylic"
@@ -79,7 +79,7 @@ export default function StrengthsSection() {
               ZIGZAGLabの<span className="text-primary">強み</span>
             </h2>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              技術力と品質管理で、お客様のアイディアを最高の形で実現します。
+              確かな技術力と品質管理で、お客様のアイディアを最高の形で実現します。
             </p>
           </div>
         </div>

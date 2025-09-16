@@ -35,16 +35,16 @@ export default function AboutStrengths() {
       features: [
         {
           title: "オリジナル商品の企画・開発",
-          description: "独自オリジナル製品を企画・開発し、これまでにない新しい製品やサービスを提供します。特許出願済。商品一覧はこちら。",
+          description: "独自オリジナル製品を企画・開発し、これまでにない新しい製品やサービスを提供します。特許出願済み。",
           image: "/strength-detail/company_1_1.jpg"
         },
         {
           title: "3DCADを用いた設計力",
-          description: "アクリル製品に「動き」を加え、ユニークなグッズを実現。イベントやプロモーションで印象的な製品展開が可能です。",
+          description: "3DCADを用いオリジナル缶バッジパーツの開発を行いました。また、アクリル製品に「動き」を加え、ユニークなグッズをご提案。イベントやプロモーションで印象的な製品展開が可能です。",
           image: "/strength-detail/company_1_2.jpeg"
         },
         {
-          title: "ものづくりに対しての技術力",
+          title: "ものづくりに対しての確かな技術力",
           description: "医療機器業界や産業機器業界向けのものづくりで培った経験を活かし、高い技術力と徹底した品質管理体制でサービスを提供します。安心してご利用いただける製品をお届けしています。",
           image: "/strength-detail/company_1_3.jpg"
         }
@@ -62,7 +62,7 @@ export default function AboutStrengths() {
       id: 2,
       anchor: "integrated",
       title: "自社一貫生産",
-      subtitle: "自社の工場で一貫生産。印刷から梱包まで。",
+      subtitle: "自社の工場で印刷から梱包まで一貫生産。",
       features: [
         {
           title: "月間50万個の製缶体制",
@@ -71,7 +71,7 @@ export default function AboutStrengths() {
         },
         {
           title: "最新のオンデマンド印刷機",
-          description: "社内に最新のオンデマンド印刷機を導入することで、必要な数量を必要なタイミングで生産可能になりました。白版印刷にも対応しており、大量生産はもちろん、小ロットのリピート発注でも短納期・低コスト・高品質を実現します。",
+          description: "社内に最新のオンデマンド印刷機を導入することで、必要な数量を必要なタイミングで生産可能になりました。大量生産はもちろん、小ロットのリピート発注でも短納期・低コスト・高品質を実現します。白版印刷にも対応しており、アンダーホログラムなどの特殊な加工も可能です。",
           image: "/strength-detail/company_2_2.png"
         },
         {
@@ -133,7 +133,7 @@ export default function AboutStrengths() {
         },
         {
           title: "クリーンルームの設置",
-          description: "クリーンルーム内での製造体制により製品の異物の混入を防止。環境の整備によって不良品の発生率も低く、低コストを実現できます。",
+          description: "クリーンルーム内での生産体制により製品の異物の混入を防止。環境の整備によって不良品の発生率も低く、低コストを実現できます。",
           image: "/strength-detail/company_4_2.jpg"
         },
         {

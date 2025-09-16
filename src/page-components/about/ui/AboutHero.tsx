@@ -30,15 +30,19 @@ export default function AboutHero() {
           <div className="flex flex-wrap justify-center gap-8 mt-16">
             <div className="text-center">
               <div className="text-4xl font-bold text-primary mb-2">自社一貫</div>
-              <div className="text-sm text-foreground/60 uppercase tracking-wide">生産体制</div>
+              <div className="text-sm text-foreground/60 uppercase tracking-wide">ワンストップで内製対応</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">50万個</div>
-              <div className="text-sm text-foreground/60 uppercase tracking-wide">月間対応可能</div>
+              <div className="text-4xl font-bold text-primary mb-2">50万個/月</div>
+              <div className="text-sm text-foreground/60 uppercase tracking-wide">缶バッジ生産可能</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">ワンストップ</div>
-              <div className="text-sm text-foreground/60 uppercase tracking-wide">内製対応</div>
+              <div className="text-4xl font-bold text-primary mb-2">20万個/月</div>
+              <div className="text-sm text-foreground/60 uppercase tracking-wide">アクリル製品生産可能</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-primary mb-2">品質管理</div>
+              <div className="text-sm text-foreground/60 uppercase tracking-wide">クリーンルーム内での生産</div>
             </div>
           </div>
         </div>

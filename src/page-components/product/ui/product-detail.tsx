@@ -206,21 +206,17 @@ export default function ProductDetail({ productName }: ProductDetailProps) {
                       <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                       <span className="text-foreground/70">オーロラ加工などの特殊加工対応</span>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                      <span className="text-foreground/70">透明感と強度を兼ね備えた高品質素材</span>
-                    </div>
                   </div>
                 )}
-                {product.category === '缶バッジ' && (
+                {product.category === '多機能缶バッジ' && (
                   <div className="space-y-3">
                     <div className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                      <span className="text-foreground/70">ホログラム加工対応</span>
+                      <span className="text-foreground/70">ホログラム、ラミネート加工対応</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                      <span className="text-foreground/70">様々なサイズバリエーション</span>
+                      <span className="text-foreground/70">57ｍｍサイズ</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
