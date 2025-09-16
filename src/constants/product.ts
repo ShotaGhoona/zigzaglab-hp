@@ -34,6 +34,7 @@ export const allProducts: Product[] = [
     mainImage: "/goods/goods_2_1.jpg",
     is_active: true,
   },
+  
   {
     id: 3,
     product_code: "KSWB",
