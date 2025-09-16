@@ -243,9 +243,10 @@ export default function HeroSection05() {
               height: `${item.size}px`,
               opacity: mounted ? item.opacity : 0,
               filter: `blur(${item.blur}px)`,
-              animation: mounted 
-                ? `productFloat${item.id} ${item.duration}s ease-in-out infinite`
-                : 'none',
+              animationName: mounted ? `productFloat${item.id}` : 'none',
+              animationDuration: `${item.duration}s`,
+              animationTimingFunction: 'ease-in-out',
+              animationIterationCount: 'infinite',
               animationDelay: `${item.delay}s`,
               transform: 'translate(-50%, -50%)', // 中心基準で配置
             }}
