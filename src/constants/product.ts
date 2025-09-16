@@ -182,11 +182,11 @@ export const allProducts: Product[] = [
   {
     id: 18,
     product_code: "CS-d",
-    name: "アンダーホログラム缶バッジ",
+    name: "ホログラム缶バッジ",
     category: "その他",
     subtitle: "キラキラ角度によって変わる色味を楽しめます。",
     description: "オーバーホログラムでも、アンダーホログラムにすることもどちらも可能です。ホログラムのパターンもいくつかありますのでお気軽にお問い合わせください。",
-    images: ["/goods/goods_18_1.jpg", "/goods/goods_18_2.jpg", "/goods/goods_18_3.jpg"],
+    images: ["/goods/goods_18_1.png", "/goods/goods_18_2.jpg", "/goods/goods_18_3.jpg"],
     mainImage: "/goods/goods_18_1.jpg",
     is_active: true,
   },
