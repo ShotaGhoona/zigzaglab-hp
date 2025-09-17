@@ -151,10 +151,10 @@ export const allProducts: Product[] = [
     name: "アクリルキーホルダー",
     category: "アクリル",
     subtitle: "実用性と視覚的訴求を両立したアクセサリー。",
-    description: "厚みと高精細印刷による視覚的なインパクトが特徴。日常使いのアイテムとしても優れた訴求効果があります。",
-    images: ["/goods/goods_10_1.jpg", "/goods/goods_10_2.jpg", "/goods/goods_10_3.jpg"],
+    description: "厚みと高精細印刷による視覚的なインパクトが特徴。日常使いのアイテムとして人気です。裏表で違うデザインも印刷可能。",
+    images: ["/goods/goods_10_1.jpg", "/goods/goods_10_2.jpg", "/goods/goods_10_3.png"],
     mainImage: "/goods/goods_10_1.jpg",
-    is_active: false,
+    is_active: true,
   },
   {
     id: 12,
