@@ -40,6 +40,8 @@ export default function ZigZagLabFooter() {
             </p>
             <div className="mt-8 text-center">
               <p className="text-secondary-foreground/70 font-light">
+                屋号：ZIGZAG Lab<br />
+                会社名：向陽エンジニアリング<br />
                 〒590-0006<br />
                 大阪府堺市堺区錦綾町1-8-19
               </p>
