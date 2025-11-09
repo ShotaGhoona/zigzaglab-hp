@@ -5,8 +5,11 @@ import IntegratedProductSection from "@/page-components/lp/ui/IntegratedProductS
 import ProcessSection from "@/page-components/lp/ui/ProcessSection";
 import HeroSection from "@/page-components/lp/ui/HeroSection";
 import NewsSection from "@/page-components/news/ui/NewsSection";
+import { getNewsItemsForUI } from "@/page-components/news/lib/newsAdapter";
 
-export default function Index() {
+export default async function Index() {
+  const newsItems = await getNewsItemsForUI();
+
   return (
     <div className="min-h-screen">
       <HeroSection />
@@ -14,8 +17,8 @@ export default function Index() {
       <StrengthsSection />
       {/* <QualityShowcase /> */}
       <ProcessSection />
-      <NewsSection />
-      <ContactSection />  
+      <NewsSection newsItems={newsItems} />
+      <ContactSection />
     </div>
   );
 }

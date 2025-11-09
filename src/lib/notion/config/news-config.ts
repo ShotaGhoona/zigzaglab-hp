@@ -41,5 +41,17 @@ export const newsConfig: DatabaseConfig = {
       name: 'Thumbnail',
       type: 'files',
     },
+    author: {
+      name: 'Author',
+      type: 'rich_text',
+    },
+    readTime: {
+      name: 'ReadTime',
+      type: 'number',
+    },
+    isFeatured: {
+      name: 'IsFeatured',
+      type: 'checkbox',
+    },
   },
 }

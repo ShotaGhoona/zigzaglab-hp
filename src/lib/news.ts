@@ -38,6 +38,10 @@ export async function getAllNewsForList(): Promise<NewsListItem[]> {
       tags: extractors.tags(page),
       summary: extractors.description(page),
       imageUrl: getImageUrl(extractors.thumbnail(page)),
+      author: extractors.author(page) || '編集部',
+      read_time_minutes: extractors.readTime(page) || 3,
+      is_featured: extractors.isFeatured(page) || false,
+      category: extractors.tags(page)[0] || 'お知らせ',
     }))
   } catch (error) {
     console.error('Error fetching news list:', error)
@@ -83,14 +87,22 @@ export async function getNewsPostById(id: string): Promise<NewsPost | null> {
     // ページのブロック（本文）を取得
     const blocks = await getPageBlocks(page.id)
 
+    const tags = extractors.tags(page)
+    const date = extractors.date(page)
+
     return {
       id: extractors.id(page),
       title: extractors.title(page),
-      date: extractors.date(page),
-      tags: extractors.tags(page),
+      date,
+      tags,
       summary: extractors.description(page),
       blocks,
       thumbnail: getImageUrl(extractors.thumbnail(page)),
+      author: extractors.author(page) || '編集部',
+      read_time_minutes: extractors.readTime(page) || 3,
+      is_featured: extractors.isFeatured(page) || false,
+      category: tags[0] || 'お知らせ',
+      published_at: date,
     }
   } catch (error) {
     console.error(`Error fetching news post by ID ${id}:`, error)

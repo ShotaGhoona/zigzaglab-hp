@@ -24,6 +24,16 @@ export interface NewsPost {
   blocks: NotionBlock[]
   /** サムネイル画像URL */
   thumbnail: string
+  /** 著者名 */
+  author?: string
+  /** 読了時間（分） */
+  read_time_minutes?: number
+  /** 注目記事フラグ */
+  is_featured?: boolean
+  /** カテゴリ（最初のタグ） */
+  category?: string
+  /** 公開日（YYYY-MM-DD形式） */
+  published_at?: string
 }
 
 /**
@@ -43,4 +53,12 @@ export interface NewsListItem {
   summary: string
   /** サムネイル画像URL */
   imageUrl: string
+  /** 著者名 */
+  author?: string
+  /** 読了時間（分） */
+  read_time_minutes?: number
+  /** 注目記事フラグ */
+  is_featured?: boolean
+  /** カテゴリ（最初のタグ） */
+  category?: string
 }

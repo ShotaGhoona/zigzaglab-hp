@@ -2,13 +2,15 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { getAllNews } from "../lib/newsData"
 import { getCategoryColor } from "@/constants/news"
 import type { NewsItem } from "../model/type"
 
-export default function NewsSection() {
+interface NewsSectionProps {
+  newsItems: NewsItem[]
+}
+
+export default function NewsSection({ newsItems }: NewsSectionProps) {
   const [isVisible, setIsVisible] = useState(false)
-  const [featuredNews, setFeaturedNews] = useState<NewsItem[]>([])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -30,18 +32,14 @@ export default function NewsSection() {
     return () => observer.disconnect()
   }, [])
 
-  useEffect(() => {
-    const news = getAllNews()
-    // 注目記事を優先し、最新4件を取得
-    const featured = news
-      .sort((a, b) => {
-        if (a.is_featured && !b.is_featured) return -1
-        if (!a.is_featured && b.is_featured) return 1
-        return new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
-      })
-      .slice(0, 4)
-    setFeaturedNews(featured)
-  }, [])
+  // 注目記事を優先し、最新4件を取得
+  const featuredNews = newsItems
+    .sort((a, b) => {
+      if (a.is_featured && !b.is_featured) return -1
+      if (!a.is_featured && b.is_featured) return 1
+      return new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
+    })
+    .slice(0, 4)
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
