@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { getCategoryColor } from "@/constants/news"
 import type { NewsItem } from "../model/type"
 
@@ -82,9 +83,10 @@ export default function NewsSection({ newsItems }: NewsSectionProps) {
                 <Link href={`/news/${news.id}`}>
                   {/* ニュース画像 */}
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <img 
-                      src={news.featured_image_url}
-                      alt={news.featured_image_alt}
+                    <Image
+                      src={news.featured_image_url || "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop&crop=center"}
+                      alt={news.featured_image_alt || news.title}
+                      fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     {/* カテゴリバッジ */}

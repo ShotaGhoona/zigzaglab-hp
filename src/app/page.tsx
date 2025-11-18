@@ -7,6 +7,10 @@ import HeroSection from "@/page-components/lp/ui/HeroSection";
 import NewsSection from "@/page-components/news/ui/NewsSection";
 import { getNewsItemsForUI } from "@/page-components/news/lib/newsAdapter";
 
+// SSR化: キャッシュを無効化して毎回最新のデータを取得
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function Index() {
   const newsItems = await getNewsItemsForUI();
 
