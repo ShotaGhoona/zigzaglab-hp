@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { getAllCategories, getAvailableYears } from "../lib/newsData"
+import { getAvailableYears } from "../lib/newsAdapter"
+import { NewsCategory, NewsItem } from "../model/type"
 
 interface NewsFilterProps {
   selectedCategory: string
@@ -10,6 +11,8 @@ interface NewsFilterProps {
   onYearChange: (year: string) => void
   searchTerm: string
   onSearchChange: (term: string) => void
+  categories: NewsCategory[]
+  newsItems: NewsItem[]
 }
 
 export default function NewsFilter({
@@ -18,13 +21,14 @@ export default function NewsFilter({
   selectedYear,
   onYearChange,
   searchTerm,
-  onSearchChange
+  onSearchChange,
+  categories,
+  newsItems
 }: NewsFilterProps) {
   const [isExpanded, setIsExpanded] = useState(false)
 
-  // Get categories and years from JSON data
-  const categories = getAllCategories()
-  const availableYears = getAvailableYears()
+  // Get available years from news items
+  const availableYears = getAvailableYears(newsItems)
   const years = [
     { id: "all", label: "すべての年" },
     ...availableYears.map(year => ({ id: year.toString(), label: `${year}年` }))

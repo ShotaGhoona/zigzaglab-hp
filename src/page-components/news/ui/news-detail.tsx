@@ -2,20 +2,22 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { getNewsById, getRelatedNews } from "@/page-components/news/lib/newsData"
 import { getCategoryColor, formatNewsDate, formatReadTime } from "@/constants/news"
+import { NewsPost } from "@/types/news"
+import NotionBlockRenderer from "@/components/ui/NotionBlockRenderer"
 
 interface NewsDetailProps {
-  newsId: string
+  newsPost: NewsPost
 }
 
-export default function NewsDetail({ newsId }: NewsDetailProps) {
+export default function NewsDetail({ newsPost }: NewsDetailProps) {
   const [isVisible, setIsVisible] = useState(false)
   const router = useRouter()
 
-  // Get news detail and related news from JSON
-  const newsData = getNewsById(newsId)
-  const relatedNews = getRelatedNews(newsId, 3)
+  // Use the passed newsPost directly
+  const newsData = newsPost
+  // Related news will be implemented later
+  const relatedNews: NewsPost[] = []
 
   useEffect(() => {
     setIsVisible(true)
@@ -66,11 +68,11 @@ export default function NewsDetail({ newsId }: NewsDetailProps) {
             {/* Article header */}
             <header className={`mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <div className="flex items-center gap-4 mb-6">
-                <span className={`px-3 py-1 text-sm font-medium text-white rounded-full ${getCategoryColor(newsData.category)}`}>
-                  {newsData.category}
+                <span className={`px-3 py-1 text-sm font-medium text-white rounded-full ${getCategoryColor(newsData.category || 'お知らせ')}`}>
+                  {newsData.category || 'お知らせ'}
                 </span>
-                <span className="text-sm text-foreground/50">{formatNewsDate(newsData.published_at)}</span>
-                <span className="text-sm text-foreground/40">{formatReadTime(newsData.read_time_minutes)}</span>
+                <span className="text-sm text-foreground/50">{formatNewsDate(newsData.published_at || newsData.date)}</span>
+                <span className="text-sm text-foreground/40">{formatReadTime(newsData.read_time_minutes || 3)}</span>
               </div>
 
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
@@ -84,31 +86,36 @@ export default function NewsDetail({ newsId }: NewsDetailProps) {
 
             {/* Featured image */}
             <div className={`mb-12 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <img 
-                src={newsData.featured_image_url || "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&h=600&fit=crop&crop=center"} 
-                alt={newsData.featured_image_alt || newsData.title}
+              <img
+                src={newsData.thumbnail || "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&h=600&fit=crop&crop=center"}
+                alt={newsData.title}
                 className="w-full h-96 object-cover rounded-2xl"
               />
             </div>
 
             {/* Article content */}
-            <div 
+            <div
               className={`prose prose-lg max-w-none mb-12 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-              dangerouslySetInnerHTML={{ __html: newsData.content || newsData.excerpt || "" }}
-            />
+            >
+              {newsData.blocks && newsData.blocks.length > 0 ? (
+                <NotionBlockRenderer blocks={newsData.blocks} />
+              ) : (
+                <p className="text-foreground/70">{newsData.summary}</p>
+              )}
+            </div>
 
             {/* Tags */}
             <div className={`mb-12 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <h3 className="text-lg font-semibold text-foreground mb-4">タグ</h3>
               <div className="flex flex-wrap gap-2">
-                {newsData.tags?.map((tag: string | { id?: string; tag_name?: string }, index: number) => (
-                  <span 
-                    key={(typeof tag === 'object' && tag.id) || index}
+                {newsData.tags?.map((tag: string, index: number) => (
+                  <span
+                    key={index}
                     className="px-3 py-1 bg-card/50 text-foreground/70 rounded-full text-sm border border-border/30"
                   >
-                    #{typeof tag === "string" ? tag : tag.tag_name}
+                    #{tag}
                   </span>
-                )) || null}
+                ))}
               </div>
             </div>
 
@@ -150,10 +157,10 @@ export default function NewsDetail({ newsId }: NewsDetailProps) {
                           >
                             <div className="p-6">
                               <div className="flex items-center justify-between mb-4">
-                                <span className={`px-3 py-1 text-xs font-medium text-white rounded-full ${getCategoryColor(item.category)}`}>
-                                  {item.category}
+                                <span className={`px-3 py-1 text-xs font-medium text-white rounded-full ${getCategoryColor(item.category || 'お知らせ')}`}>
+                                  {item.category || 'お知らせ'}
                                 </span>
-                                <span className="text-sm text-foreground/50 font-light">{formatNewsDate(item.published_at)}</span>
+                                <span className="text-sm text-foreground/50 font-light">{formatNewsDate(item.published_at || item.date)}</span>
                               </div>
                               
                               <h4 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors mb-4 leading-tight">

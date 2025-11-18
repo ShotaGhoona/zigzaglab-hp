@@ -1,4 +1,33 @@
-[
+/**
+ * News Migration Script: JSON to Notion
+ * 既存のニュース記事JSONデータをNotionデータベースに移行
+ */
+
+const { Client } = require('@notionhq/client');
+const fs = require('fs');
+const path = require('path');
+
+// .env.localファイルを手動で読み込み
+const envPath = path.join(__dirname, '..', '.env.local');
+const envContent = fs.readFileSync(envPath, 'utf8');
+const envVars = {};
+envContent.split('\n').forEach(line => {
+  const match = line.match(/^([^=:#]+)=(.*)$/);
+  if (match) {
+    const key = match[1].trim();
+    const value = match[2].trim();
+    envVars[key] = value;
+  }
+});
+
+const notion = new Client({
+  auth: envVars.NOTION_API_KEY,
+});
+
+const DATABASE_ID = envVars.NOTION_NEWS_DATABASE_ID;
+
+// 移行するニュースデータ
+const newsData = [
   {
     "id": "1",
     "title": "推し活EXPO開催",
@@ -59,4 +88,251 @@
       {"id": "12", "tag_name": "新商品"}
     ]
   }
-]
+];
+
+/**
+ * HTMLをNotionブロックに変換
+ * 簡易的な変換（パース）を行う
+ */
+function htmlToNotionBlocks(html) {
+  const blocks = [];
+
+  // HTMLタグを削除して簡易的にパース
+  const lines = html
+    .replace(/<div[^>]*>/g, '')
+    .replace(/<\/div>/g, '')
+    .split(/<\/p>|<\/h3>|<\/h4>|<\/ul>|<\/li>/);
+
+  lines.forEach(line => {
+    const trimmed = line.trim();
+    if (!trimmed) return;
+
+    // 見出し3
+    if (trimmed.includes('<h3>')) {
+      const text = trimmed.replace(/<[^>]+>/g, '').trim();
+      if (text) {
+        blocks.push({
+          object: 'block',
+          type: 'heading_2',
+          heading_2: {
+            rich_text: [{
+              type: 'text',
+              text: { content: text }
+            }]
+          }
+        });
+      }
+      return;
+    }
+
+    // 見出し4
+    if (trimmed.includes('<h4>')) {
+      const text = trimmed.replace(/<[^>]+>/g, '').trim();
+      if (text) {
+        blocks.push({
+          object: 'block',
+          type: 'heading_3',
+          heading_3: {
+            rich_text: [{
+              type: 'text',
+              text: { content: text }
+            }]
+          }
+        });
+      }
+      return;
+    }
+
+    // リスト項目
+    if (trimmed.includes('<li>') || trimmed.includes('<ul>')) {
+      const text = trimmed.replace(/<[^>]+>/g, '').trim();
+      if (text && !text.match(/^</) && text.length > 0) {
+        blocks.push({
+          object: 'block',
+          type: 'bulleted_list_item',
+          bulleted_list_item: {
+            rich_text: [{
+              type: 'text',
+              text: { content: text }
+            }]
+          }
+        });
+      }
+      return;
+    }
+
+    // 画像
+    if (trimmed.includes('<img')) {
+      const srcMatch = trimmed.match(/src="([^"]+)"/);
+      const altMatch = trimmed.match(/alt="([^"]+)"/);
+
+      if (srcMatch) {
+        const imageUrl = srcMatch[1];
+        // 相対パスを絶対URLに変換（本番環境のURLに置き換える必要あり）
+        const fullUrl = imageUrl.startsWith('http')
+          ? imageUrl
+          : `https://zigzaglab.jp${imageUrl}`;
+
+        blocks.push({
+          object: 'block',
+          type: 'paragraph',
+          paragraph: {
+            rich_text: [{
+              type: 'text',
+              text: { content: `📷 画像: ${altMatch ? altMatch[1] : imageUrl}` }
+            }]
+          }
+        });
+
+        // Note: Notion APIで外部画像を追加するには、画像がパブリックにアクセス可能である必要があります
+        // 現在は画像の説明テキストとして追加しています
+      }
+      return;
+    }
+
+    // 通常の段落
+    if (trimmed.includes('<p>')) {
+      let text = trimmed.replace(/<p>/g, '').replace(/<br\s*\/?>/g, '\n').trim();
+
+      // strongタグを太字に変換（Notionのrich_textで対応可能）
+      const hasStrong = text.includes('<strong>');
+      text = text.replace(/<[^>]+>/g, '');
+
+      if (text) {
+        blocks.push({
+          object: 'block',
+          type: 'paragraph',
+          paragraph: {
+            rich_text: [{
+              type: 'text',
+              text: { content: text },
+              annotations: hasStrong ? { bold: true } : {}
+            }]
+          }
+        });
+      }
+    }
+  });
+
+  return blocks;
+}
+
+/**
+ * Notionページを作成
+ */
+async function createNewsPage(newsItem) {
+  try {
+    console.log(`\n📝 Creating page: "${newsItem.title}"`);
+
+    // プロパティの準備
+    const properties = {
+      Name: {
+        title: [{
+          text: { content: newsItem.title }
+        }]
+      },
+      Date: {
+        date: {
+          start: newsItem.published_at.split('T')[0]
+        }
+      },
+      Tag: {
+        multi_select: newsItem.tags.map(tag => ({ name: tag.tag_name }))
+      },
+      Description: {
+        rich_text: [{
+          text: { content: newsItem.excerpt }
+        }]
+      },
+      Author: {
+        rich_text: [{
+          text: { content: newsItem.author }
+        }]
+      },
+      ReadTime: {
+        number: newsItem.read_time_minutes
+      },
+      IsFeature: {
+        checkbox: newsItem.is_featured
+      }
+    };
+
+    // Thumbnailは手動で設定する必要があるため、コメントとして残す
+    console.log(`   Thumbnail: ${newsItem.featured_image_url}`);
+
+    // ページ作成（Data Sources APIを使用）
+    const response = await notion.pages.create({
+      parent: {
+        type: 'database_id',
+        database_id: DATABASE_ID
+      },
+      properties: properties
+    });
+
+    console.log(`✅ Page created with ID: ${response.id}`);
+
+    // 本文ブロックを追加
+    const blocks = htmlToNotionBlocks(newsItem.content);
+
+    if (blocks.length > 0) {
+      // Notion APIは一度に100ブロックまでしか追加できないため、分割して追加
+      const chunkSize = 100;
+      for (let i = 0; i < blocks.length; i += chunkSize) {
+        const chunk = blocks.slice(i, i + chunkSize);
+        await notion.blocks.children.append({
+          block_id: response.id,
+          children: chunk
+        });
+      }
+      console.log(`   Added ${blocks.length} blocks to the page`);
+    }
+
+    return response;
+  } catch (error) {
+    console.error(`❌ Error creating page "${newsItem.title}":`, error.message);
+    if (error.body) {
+      console.error('   Error details:', JSON.stringify(error.body, null, 2));
+    }
+    throw error;
+  }
+}
+
+/**
+ * メイン処理
+ */
+async function main() {
+  console.log('🚀 Starting News Migration to Notion...\n');
+  console.log(`Database ID: ${DATABASE_ID}`);
+  console.log(`Total items to migrate: ${newsData.length}\n`);
+
+  let successCount = 0;
+  let errorCount = 0;
+
+  for (const newsItem of newsData) {
+    try {
+      await createNewsPage(newsItem);
+      successCount++;
+
+      // APIレート制限を避けるため、少し待機
+      await new Promise(resolve => setTimeout(resolve, 500));
+    } catch (error) {
+      errorCount++;
+    }
+  }
+
+  console.log('\n' + '='.repeat(60));
+  console.log('📊 Migration Summary');
+  console.log('='.repeat(60));
+  console.log(`✅ Successful: ${successCount}`);
+  console.log(`❌ Failed: ${errorCount}`);
+  console.log(`📝 Total: ${newsData.length}`);
+  console.log('='.repeat(60));
+
+  console.log('\n⚠️  Important Notes:');
+  console.log('1. Thumbnail images need to be uploaded manually to each page');
+  console.log('2. Images in content are converted to text references');
+  console.log('3. Please review and format the pages in Notion');
+  console.log('4. Make sure to add the ID property manually if needed\n');
+}
+
+main().catch(console.error);

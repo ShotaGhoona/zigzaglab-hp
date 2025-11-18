@@ -1,36 +1,45 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import { useRouter } from "next/navigation"
-import { getFilteredNews, getFeaturedNews } from "../lib/newsData"
+import { filterNewsItems } from "../lib/newsAdapter"
 import { getCategoryColor, formatNewsDate, formatReadTime } from "@/constants/news"
-import type { NewsFilterParams } from "../model/type"
+import type { NewsItem } from "../model/type"
 
 interface NewsGridProps {
   selectedCategory: string
   selectedYear: string
   searchTerm: string
+  newsItems: NewsItem[]
 }
 
-export default function NewsGrid({ selectedCategory, selectedYear, searchTerm }: NewsGridProps) {
+export default function NewsGrid({ selectedCategory, selectedYear, searchTerm, newsItems }: NewsGridProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const router = useRouter()
 
-  // Build filter parameters
-  const filterParams: NewsFilterParams = {
-    category: selectedCategory !== "all" ? selectedCategory : undefined,
-    year: selectedYear !== "all" ? parseInt(selectedYear) : undefined,
-    search: searchTerm || undefined,
-    page: currentPage,
-    page_size: 12,
-    sort_by: 'published_at',
-    sort_order: 'desc'
-  }
+  // Filter news items
+  const filteredNews = useMemo(() => {
+    return filterNewsItems(newsItems, selectedCategory, selectedYear, searchTerm)
+  }, [newsItems, selectedCategory, selectedYear, searchTerm])
 
-  // Get news data from JSON
-  const { news, pagination } = getFilteredNews(filterParams)
-  const featuredNews = getFeaturedNews()
+  // Paginate
+  const pageSize = 12
+  const startIndex = (currentPage - 1) * pageSize
+  const endIndex = startIndex + pageSize
+  const paginatedNews = filteredNews.slice(startIndex, endIndex)
+  const hasNext = endIndex < filteredNews.length
+
+  // Get featured news
+  const featuredNews = newsItems.filter(item => item.is_featured)
+
+  const pagination = {
+    total: filteredNews.length,
+    page: currentPage,
+    page_size: pageSize,
+    has_next: hasNext,
+    has_prev: currentPage > 1,
+  }
 
   // Reset page when filters change
   useEffect(() => {
@@ -133,7 +142,7 @@ export default function NewsGrid({ selectedCategory, selectedYear, searchTerm }:
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {news.map((item, index) => (
+          {paginatedNews.map((item, index) => (
             <article 
               key={item.id}
               onClick={() => handleNewsClick(item.id)}
@@ -182,7 +191,7 @@ export default function NewsGrid({ selectedCategory, selectedYear, searchTerm }:
         </div>
 
         {/* No results */}
-        {news.length === 0 && (
+        {paginatedNews.length === 0 && (
           <div className="text-center py-16">
             <div className="text-6xl mb-4">📰</div>
             <h3 className="text-xl font-semibold text-foreground mb-2">記事が見つかりませんでした</h3>
