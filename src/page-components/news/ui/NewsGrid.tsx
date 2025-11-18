@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useMemo } from "react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { filterNewsItems } from "../lib/newsAdapter"
 import { getCategoryColor, formatNewsDate, formatReadTime } from "@/constants/news"
 import type { NewsItem } from "../model/type"
@@ -96,10 +97,11 @@ export default function NewsGrid({ selectedCategory, selectedYear, searchTerm, n
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className="relative h-64 overflow-hidden">
-                    <img 
-                      src={item.featured_image_url || "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop&crop=center"} 
+                    <Image
+                      src={item.featured_image_url || "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop&crop=center"}
                       alt={item.featured_image_alt || item.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute top-4 left-4">
                       <span className={`px-3 py-1 text-xs font-medium text-white rounded-full ${getCategoryColor(item.category)}`}>
@@ -152,10 +154,11 @@ export default function NewsGrid({ selectedCategory, selectedYear, searchTerm, n
               style={{ transitionDelay: `${index * 50}ms` }}
             >
               <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={item.featured_image_url || "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop&crop=center"} 
+                <Image
+                  src={item.featured_image_url || "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop&crop=center"}
                   alt={item.featured_image_alt || item.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute top-4 left-4">
                   <span className={`px-3 py-1 text-xs font-medium text-white rounded-full ${getCategoryColor(item.category)}`}>

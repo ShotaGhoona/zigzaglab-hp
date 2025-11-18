@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { getCategoryColor, formatNewsDate, formatReadTime } from "@/constants/news"
 import { NewsPost } from "@/types/news"
 import NotionBlockRenderer from "@/components/ui/NotionBlockRenderer"
@@ -85,11 +86,12 @@ export default function NewsDetail({ newsPost }: NewsDetailProps) {
             </header>
 
             {/* Featured image */}
-            <div className={`mb-12 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <img
+            <div className={`relative mb-12 h-96 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <Image
                 src={newsData.thumbnail || "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&h=600&fit=crop&crop=center"}
                 alt={newsData.title}
-                className="w-full h-96 object-cover rounded-2xl"
+                fill
+                className="object-cover rounded-2xl"
               />
             </div>
 

@@ -265,7 +265,6 @@ function renderImage(block: NotionBlock): ReactNode {
         height={675}
         className="w-full h-auto rounded-sm shadow-sm"
         style={{ objectFit: 'cover' }}
-        unoptimized
       />
     </div>
   )
