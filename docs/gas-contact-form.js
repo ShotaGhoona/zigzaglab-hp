@@ -1,12 +1,34 @@
+// =============================================================
+// ZIGZAG お問い合わせフォーム用 Google Apps Script
+// スプレッドシートに保存 + zigzag@koyoeng.biz へメール通知
+// 貼り付け先: スプレッドシート → 拡張機能 → Apps Script → コード.gs
+// =============================================================
+
+// 通知メールの送信先（変更する場合はここだけ書き換える）
+const NOTIFY_TO = 'zigzag@koyoeng.biz';
+
+// シート1行目のヘッダー（最初に一度だけ setupHeaders() を実行して作成）
+const HEADERS = [
+  '送信日時', '問い合わせタイプ', '名前', '会社名', '役職',
+  'メールアドレス', '住所', '電話番号', '商品カテゴリ', 'お問い合わせ内容'
+];
+
+// ヘルスチェック用（ブラウザでURLを開いたとき / 動作確認用）
+function doGet() {
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'ok' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
 function doPost(e) {
   try {
     // スプレッドシートを取得（このスクリプトに紐付いたシート）
     const sheet = SpreadsheetApp.getActiveSheet();
-    
+
     // POSTデータを解析
     const data = JSON.parse(e.postData.contents);
-    
-    // データ配列を作成
+
+    // データ配列を作成（HEADERS と同じ順番）
     const rowData = [
       new Date().toLocaleString('ja-JP'), // 送信日時
       data.contactType || '',             // 問い合わせタイプ（inquiry/quote/sample）
@@ -19,13 +41,13 @@ function doPost(e) {
       data.category || '',                // 商品カテゴリ
       data.message || ''                  // お問い合わせ内容
     ];
-    
+
     // データをスプレッドシートに追加
     sheet.appendRow(rowData);
-    
+
     // メール通知を送信
     sendNotificationEmail(rowData);
-    
+
     // 成功レスポンスを返す
     return ContentService
       .createTextOutput(JSON.stringify({
@@ -33,8 +55,9 @@ function doPost(e) {
         message: 'お問い合わせを受け付けました。2-3営業日以内にご返信いたします。'
       }))
       .setMimeType(ContentService.MimeType.JSON);
-      
+
   } catch (error) {
+    console.error('Error in doPost:', error);
     // エラーレスポンスを返す
     return ContentService
       .createTextOutput(JSON.stringify({
@@ -46,17 +69,15 @@ function doPost(e) {
 }
 
 function sendNotificationEmail(rowData) {
-  const recipient = 'yamashita98syota@gmail.com';
-  
   // 問い合わせタイプによってメール件名を変更
   const contactTypeMap = {
     'inquiry': 'お問い合わせ',
-    'quote': '見積もり依頼', 
+    'quote': '見積もり依頼',
     'sample': 'サンプル送付依頼'
   };
   const contactTypeLabel = contactTypeMap[rowData[1]] || 'お問い合わせ';
   const subject = `ZIGZAG - 新しい${contactTypeLabel}があります`;
-  
+
   const htmlBody = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
       <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">
@@ -83,14 +104,38 @@ function sendNotificationEmail(rowData) {
       </div>
     </div>
   `;
-  
+
   try {
-    GmailApp.sendEmail(recipient, subject, '', {
-      htmlBody: htmlBody
-    });
-    console.log('Email sent successfully to:', recipient);
+    GmailApp.sendEmail(NOTIFY_TO, subject, '', { htmlBody: htmlBody });
+    console.log('Email sent successfully to:', NOTIFY_TO);
   } catch (error) {
     console.error('Failed to send email:', error);
     throw error;
   }
+}
+
+// ---- 初回セットアップ用：1行目にヘッダーを作る（最初に一度だけ実行）----
+function setupHeaders() {
+  const sheet = SpreadsheetApp.getActiveSheet();
+  sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
+  sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
+}
+
+// ---- 動作確認用：これを実行するとテスト1件が追加されメールが飛ぶ ----
+function testRun() {
+  doPost({
+    postData: {
+      contents: JSON.stringify({
+        contactType: 'inquiry',
+        name: 'テスト太郎',
+        company: 'テスト株式会社',
+        position: '担当',
+        email: 'test@example.com',
+        address: '',
+        phone: '09000000000',
+        category: 'テストカテゴリ',
+        message: 'これはテスト送信です。'
+      })
+    }
+  });
 }
